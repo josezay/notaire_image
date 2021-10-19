@@ -1,4 +1,4 @@
-unit Unit1;
+unit form_principal;
 
 {$mode objfpc}{$H+}
 
@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, ftptsend;
+  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus;
 
 type
 
@@ -21,11 +21,15 @@ type
     BtnExecutar: TBitBtn;
     BtnAbrirImagens: TBitBtn;
     CampoNumeroMatricula: TEdit;
+    CheckBoxEnviarNuvem: TCheckBox;
     CheckBoxApagarImagens: TCheckBox;
     CheckBoxGerarTIF: TCheckBox;
     CheckBoxCompactarImagens: TCheckBox;
     CheckBoxGerarPDF: TCheckBox;
     FormStorage: TIniPropStorage;
+    LabelDiretorioRAR: TLabel;
+    LabelDiretorioPDF: TLabel;
+    LabelDiretorioTIF: TLabel;
     LabelNumeroMatricula: TLabel;
     LabelListaArquivos: TLabel;
     ListaArquivos: TListBox;
@@ -69,6 +73,9 @@ procedure TFormularioPrincipal.FormCreate(Sender: TObject);
 begin
   FormStorage.IniFileName:='config.ini';
   FormStorage.Restore;
+  LabelDiretorioRAR.Caption:=FormStorage.StoredValue['DiretorioRAR'];
+  LabelDiretorioPDF.Caption:=FormStorage.StoredValue['DiretorioPDF'];
+  LabelDiretorioTIF.Caption:=FormStorage.StoredValue['DiretorioTIF'];
 end;
 
 procedure TFormularioPrincipal.MenuItemSairClick(Sender: TObject);
@@ -95,7 +102,8 @@ procedure TFormularioPrincipal.BtnRarDirClick(Sender: TObject);
 begin
   if SelectDirectoryRARDialog.Execute then
   begin
-    FormStorage.StoredValue['DiretorioRAR'] := SelectDirectoryRARDialog.Filename;
+    LabelDiretorioRAR.Caption:= SelectDirectoryRARDialog.Filename;
+    FormStorage.StoredValue['DiretorioRAR']:= SelectDirectoryRARDialog.Filename;
     FormStorage.Save;
   end
 end;
@@ -104,7 +112,8 @@ procedure TFormularioPrincipal.BtnPDFDirClick(Sender: TObject);
 begin
   if SelectDirectoryPDFDialog.Execute then
   begin
-    FormStorage.StoredValue['DiretorioPDF'] := SelectDirectoryPDFDialog.Filename;
+    LabelDiretorioPDF.Caption:= SelectDirectoryPDFDialog.Filename;
+    FormStorage.StoredValue['DiretorioPDF']:= SelectDirectoryPDFDialog.Filename;
     FormStorage.Save;
   end
 end;
@@ -113,7 +122,8 @@ procedure TFormularioPrincipal.BtnTifDirClick(Sender: TObject);
 begin
   if SelectDirectoryTIFDialog.Execute then
   begin
-    FormStorage.StoredValue['DiretorioTIF'] := SelectDirectoryTIFDialog.Filename;
+    LabelDiretorioTIF.Caption:= SelectDirectoryTIFDialog.Filename;
+    FormStorage.StoredValue['DiretorioTIF']:= SelectDirectoryTIFDialog.Filename;
     FormStorage.Save;
   end
 end;
@@ -217,6 +227,7 @@ begin
   RunProgram.Options := RunProgram.Options + [poWaitOnExit];
   RunProgram.Execute;
   RunProgram.Free;
+  geraRar := true;
 end;
 
 // Gera PDF-A
@@ -265,6 +276,7 @@ begin
     begin
       DeleteFile(Arquivo)
     end;
+    geraPDF := true;
 end;
 
 // Gera TIF
