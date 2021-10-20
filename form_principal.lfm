@@ -1,7 +1,7 @@
 object FormularioPrincipal: TFormularioPrincipal
-  Left = 404
+  Left = 21
   Height = 571
-  Top = 121
+  Top = 122
   Width = 1000
   Caption = 'Notaire_image'
   ClientHeight = 551
@@ -1467,7 +1467,7 @@ object FormularioPrincipal: TFormularioPrincipal
         State = cbChecked
         TabOrder = 3
       end
-      object BtnRarDir: TBitBtn
+      object BtnRARDir: TBitBtn
         AnchorSideLeft.Control = CheckBoxCompactarImagens
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = CheckBoxCompactarImagens
@@ -1514,7 +1514,7 @@ object FormularioPrincipal: TFormularioPrincipal
           0000000000000000000000000000000000008D9190FF8D918FFF8D918FFF8C90
           8FFF8B8F8DFF898E8CFF888C8AFF878B89FF858988FF848887FF
         }
-        OnClick = BtnRarDirClick
+        OnClick = BtnRARDirClick
         TabOrder = 4
       end
       object BtnPDFDir: TBitBtn
@@ -1567,7 +1567,7 @@ object FormularioPrincipal: TFormularioPrincipal
         OnClick = BtnPDFDirClick
         TabOrder = 5
       end
-      object BtnTifDir: TBitBtn
+      object BtnTIFDir: TBitBtn
         AnchorSideLeft.Control = CheckBoxGerarTIF
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = CheckBoxGerarTIF
@@ -1614,7 +1614,7 @@ object FormularioPrincipal: TFormularioPrincipal
           0000000000000000000000000000000000008D9190FF8D918FFF8D918FFF8C90
           8FFF8B8F8DFF898E8CFF888C8AFF878B89FF858988FF848887FF
         }
-        OnClick = BtnTifDirClick
+        OnClick = BtnTIFDirClick
         TabOrder = 6
       end
       object CheckBoxEnviarNuvem: TCheckBox
@@ -1633,9 +1633,9 @@ object FormularioPrincipal: TFormularioPrincipal
         TabOrder = 7
       end
       object LabelDiretorioRAR: TLabel
-        AnchorSideLeft.Control = BtnRarDir
+        AnchorSideLeft.Control = BtnRARDir
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = BtnRarDir
+        AnchorSideTop.Control = BtnRARDir
         AnchorSideTop.Side = asrCenter
         Left = 124
         Height = 1
@@ -1657,9 +1657,9 @@ object FormularioPrincipal: TFormularioPrincipal
         ParentColor = False
       end
       object LabelDiretorioTIF: TLabel
-        AnchorSideLeft.Control = BtnTifDir
+        AnchorSideLeft.Control = BtnTIFDir
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = BtnTifDir
+        AnchorSideTop.Control = BtnTIFDir
         AnchorSideTop.Side = asrCenter
         Left = 117
         Height = 1

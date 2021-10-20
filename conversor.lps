@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="conversor.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <CursorPos X="37" Y="10"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,11 +19,10 @@
         <ComponentName Value="FormularioPrincipal"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="75"/>
-        <CursorPos X="67" Y="78"/>
-        <FoldState Value=" T3ib0441212G"/>
-        <UsageCount Value="44"/>
+        <TopLine Value="211"/>
+        <CursorPos X="16" Y="296"/>
+        <FoldState Value=" T3ib0441312A"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -33,14 +32,14 @@
         <UnitName Value="Biblio"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="12"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="50"/>
       </Unit2>
       <Unit3>
         <Filename Value="D:\lazarus\lcl\include\control.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3937"/>
         <CursorPos Y="3945"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit3>
       <Unit4>
         <Filename Value="unit1.lfm"/>
@@ -49,14 +48,14 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="4"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit4>
       <Unit5>
         <Filename Value="D:\lazarus\fpc\3.2.0\source\rtl\objpas\sysutils\finah.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="27"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit5>
       <Unit6>
         <Filename Value="D:\lazarus\lcl\inipropstorage.pas"/>
@@ -64,15 +63,24 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="32"/>
         <CursorPos Y="142"/>
-        <UsageCount Value="17"/>
+        <UsageCount Value="16"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\Users\JoseZay\Desktop\source\lib\dnssend.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="C:\Sistemas\SYNAPSE\lib\ftptsend.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="231"/>
+        <CursorPos X="28" Y="264"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
+      </Unit8>
     </Units>
-    <JumpHistory Count="7" HistoryIndex="6">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="form_principal.pas"/>
         <Caret Line="52" Column="39" TopLine="46"/>
@@ -99,8 +107,35 @@
       </Position6>
       <Position7>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="56" Column="35" TopLine="141"/>
+        <Caret Line="9" Column="63" TopLine="55"/>
       </Position7>
+      <Position8>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="285" Column="55" TopLine="234"/>
+      </Position8>
+      <Position9>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="286" Column="24" TopLine="234"/>
+      </Position9>
+      <Position10>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="285" Column="55" TopLine="211"/>
+      </Position10>
+      <Position11>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="288" TopLine="232"/>
+      </Position11>
+      <Position12>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="306" Column="13" TopLine="291"/>
+      </Position12>
+      <Position13>
+        <Filename Value="C:\Sistemas\SYNAPSE\lib\ftptsend.pas"/>
+      </Position13>
+      <Position14>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="296" Column="35" TopLine="164"/>
+      </Position14>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

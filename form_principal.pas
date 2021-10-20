@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus;
+  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, ftptsend;
 
 type
 
@@ -15,9 +15,9 @@ type
   TFormularioPrincipal = class(TForm)
     BarraDeStatus: TStatusBar;
     BarraDeFerramenta: TToolBar;
-    BtnTifDir: TBitBtn;
+    BtnTIFDir: TBitBtn;
     BtnPDFDir: TBitBtn;
-    BtnRarDir: TBitBtn;
+    BtnRARDir: TBitBtn;
     BtnExecutar: TBitBtn;
     BtnAbrirImagens: TBitBtn;
     CampoNumeroMatricula: TEdit;
@@ -43,10 +43,10 @@ type
     SelectDirectoryPDFDialog: TSelectDirectoryDialog;
     SelectDirectoryRARDialog: TSelectDirectoryDialog;
     procedure BtnPDFDirClick(Sender: TObject);
-    procedure BtnRarDirClick(Sender: TObject);
+    procedure BtnRARDirClick(Sender: TObject);
     procedure BtnAbrirImagensClick(Sender: TObject);
     procedure BtnExecutarClick(Sender: TObject);
-    procedure BtnTifDirClick(Sender: TObject);
+    procedure BtnTIFDirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure MenuItemSairClick(Sender: TObject);
     function valida(): boolean;
@@ -98,7 +98,7 @@ begin
   end;
 end;
 
-procedure TFormularioPrincipal.BtnRarDirClick(Sender: TObject);
+procedure TFormularioPrincipal.BtnRARDirClick(Sender: TObject);
 begin
   if SelectDirectoryRARDialog.Execute then
   begin
@@ -118,7 +118,7 @@ begin
   end
 end;
 
-procedure TFormularioPrincipal.BtnTifDirClick(Sender: TObject);
+procedure TFormularioPrincipal.BtnTIFDirClick(Sender: TObject);
 begin
   if SelectDirectoryTIFDialog.Execute then
   begin
