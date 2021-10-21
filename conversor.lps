@@ -8,10 +8,9 @@
       <Unit0>
         <Filename Value="conversor.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="37" Y="10"/>
-        <UsageCount Value="57"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="68"/>
       </Unit0>
       <Unit1>
         <Filename Value="form_principal.pas"/>
@@ -20,10 +19,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="45"/>
-        <CursorPos X="32" Y="56"/>
-        <FoldState Value=" T3j00441222;"/>
-        <UsageCount Value="57"/>
+        <TopLine Value="296"/>
+        <CursorPos X="32" Y="309"/>
+        <FoldState Value=" T3ie046 pjOk10K032a"/>
+        <UsageCount Value="68"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -33,14 +32,14 @@
         <UnitName Value="Biblio"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="12"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="63"/>
       </Unit2>
       <Unit3>
         <Filename Value="D:\lazarus\lcl\include\control.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3937"/>
         <CursorPos Y="3945"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit3>
       <Unit4>
         <Filename Value="unit1.lfm"/>
@@ -49,14 +48,14 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="4"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit4>
       <Unit5>
         <Filename Value="D:\lazarus\fpc\3.2.0\source\rtl\objpas\sysutils\finah.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="27"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit5>
       <Unit6>
         <Filename Value="D:\lazarus\lcl\inipropstorage.pas"/>
@@ -64,130 +63,149 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="32"/>
         <CursorPos Y="142"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="15"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\Users\JoseZay\Desktop\source\lib\dnssend.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit7>
       <Unit8>
         <Filename Value="C:\Sistemas\SYNAPSE\lib\ftptsend.pas"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="184"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="183"/>
         <CursorPos X="24" Y="168"/>
-        <UsageCount Value="14"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="17"/>
       </Unit8>
       <Unit9>
         <Filename Value="C:\Sistemas\SYNAPSE\lib\httpsend.pas"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="434"/>
         <CursorPos X="54" Y="441"/>
-        <UsageCount Value="11"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="14"/>
       </Unit9>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="52" Column="39" TopLine="46"/>
+        <Caret Line="288" TopLine="232"/>
       </Position1>
       <Position2>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="53" Column="39" TopLine="47"/>
+        <Caret Line="306" Column="13" TopLine="291"/>
       </Position2>
       <Position3>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="52" Column="39" TopLine="46"/>
+        <Caret Line="296" Column="35" TopLine="164"/>
       </Position3>
       <Position4>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="53" Column="39" TopLine="47"/>
+        <Caret Line="299" Column="22"/>
       </Position4>
       <Position5>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="54" Column="39" TopLine="54"/>
+        <Caret Line="9" Column="63"/>
       </Position5>
       <Position6>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="55" Column="39" TopLine="55"/>
+        <Caret Line="313" Column="4" TopLine="284"/>
       </Position6>
       <Position7>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="285" Column="55" TopLine="234"/>
+        <Caret Line="292" Column="26" TopLine="277"/>
       </Position7>
       <Position8>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="286" Column="24" TopLine="234"/>
+        <Caret Line="293" Column="26" TopLine="293"/>
       </Position8>
       <Position9>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="285" Column="55" TopLine="211"/>
+        <Caret Line="295" Column="26" TopLine="295"/>
       </Position9>
       <Position10>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="288" TopLine="232"/>
+        <Caret Line="294" Column="26" TopLine="294"/>
       </Position10>
       <Position11>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="306" Column="13" TopLine="291"/>
+        <Caret Line="293" Column="26" TopLine="293"/>
       </Position11>
       <Position12>
-        <Filename Value="C:\Sistemas\SYNAPSE\lib\ftptsend.pas"/>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="13" Column="61"/>
       </Position12>
       <Position13>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="296" Column="35" TopLine="164"/>
+        <Caret Line="294" Column="78" TopLine="267"/>
       </Position13>
       <Position14>
-        <Filename Value="C:\Sistemas\SYNAPSE\lib\ftptsend.pas"/>
-        <Caret Line="264" Column="28" TopLine="231"/>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="78" Column="21" TopLine="64"/>
       </Position14>
       <Position15>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="299" Column="22"/>
+        <Caret Line="56" Column="32" TopLine="45"/>
       </Position15>
       <Position16>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="9" Column="63"/>
+        <Caret Line="55" Column="50" TopLine="37"/>
       </Position16>
       <Position17>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="313" Column="4" TopLine="284"/>
+        <Caret Line="302" Column="9" TopLine="278"/>
       </Position17>
       <Position18>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="292" Column="26" TopLine="277"/>
+        <Caret Line="290" Column="29" TopLine="277"/>
       </Position18>
       <Position19>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="293" Column="26" TopLine="293"/>
+        <Caret Line="293" Column="6" TopLine="270"/>
       </Position19>
       <Position20>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="295" Column="26" TopLine="295"/>
+        <Caret Line="56" Column="47" TopLine="45"/>
       </Position20>
       <Position21>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="294" Column="26" TopLine="294"/>
+        <Caret Line="74" Column="6" TopLine="58"/>
       </Position21>
       <Position22>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="293" Column="26" TopLine="293"/>
+        <Caret Line="305" TopLine="283"/>
       </Position22>
       <Position23>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="13" Column="61"/>
+        <Caret Line="311" TopLine="283"/>
       </Position23>
       <Position24>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="294" Column="78" TopLine="267"/>
+        <Caret Line="305" TopLine="283"/>
       </Position24>
       <Position25>
         <Filename Value="form_principal.pas"/>
-        <Caret Line="78" Column="21" TopLine="64"/>
+        <Caret Line="312" Column="52" TopLine="287"/>
       </Position25>
+      <Position26>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="326" Column="46" TopLine="307"/>
+      </Position26>
+      <Position27>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="324" Column="28" TopLine="307"/>
+      </Position27>
+      <Position28>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="331" Column="10" TopLine="307"/>
+      </Position28>
+      <Position29>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="324" Column="15" TopLine="310"/>
+      </Position29>
+      <Position30>
+        <Filename Value="form_principal.pas"/>
+        <Caret Line="332" Column="44" TopLine="311"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -1,7 +1,7 @@
 object FormularioPrincipal: TFormularioPrincipal
-  Left = 422
+  Left = 21
   Height = 571
-  Top = 157
+  Top = 158
   Width = 1000
   Caption = 'Notaire_image'
   ClientHeight = 551

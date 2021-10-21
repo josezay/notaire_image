@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, fphttpclient;
+  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, fphttpclient, FileUtil;
 
 type
 
@@ -53,17 +53,14 @@ type
     function geraRAR(Matricula: string): boolean;
     function geraTIF(Matricula: string): boolean;
     function geraPDF(Matricula: string): boolean;
-    function sincronizaArquivo(): boolean;
-    procedure apagaArquivosOrigem;
+    function sincronizaArquivo(Arquivo: string): boolean;
+    function ressincronizaArquivos(): boolean;
+    function apagaArquivosOrigem(): boolean;
   private
 
   public
 
   end;
-
-const
-  FieldName = 'sendimage';
-  FileName = '022.pdf';
 
 var
   FormularioPrincipal: TFormularioPrincipal;
@@ -76,12 +73,12 @@ implementation
 
 procedure TFormularioPrincipal.FormCreate(Sender: TObject);
 begin
-  sincronizaArquivo;
-  FormStorage.IniFileName:='config.ini';
+  FormStorage.IniFileName := 'config.ini';
   FormStorage.Restore;
-  LabelDiretorioRAR.Caption:=FormStorage.StoredValue['DiretorioRAR'];
-  LabelDiretorioPDF.Caption:=FormStorage.StoredValue['DiretorioPDF'];
-  LabelDiretorioTIF.Caption:=FormStorage.StoredValue['DiretorioTIF'];
+  LabelDiretorioRAR.Caption := FormStorage.StoredValue['DiretorioRAR'];
+  LabelDiretorioPDF.Caption := FormStorage.StoredValue['DiretorioPDF'];
+  LabelDiretorioTIF.Caption := FormStorage.StoredValue['DiretorioTIF'];
+  ressincronizaArquivos;
 end;
 
 procedure TFormularioPrincipal.MenuItemSairClick(Sender: TObject);
@@ -108,8 +105,8 @@ procedure TFormularioPrincipal.BtnRARDirClick(Sender: TObject);
 begin
   if SelectDirectoryRARDialog.Execute then
   begin
-    LabelDiretorioRAR.Caption:= SelectDirectoryRARDialog.Filename;
-    FormStorage.StoredValue['DiretorioRAR']:= SelectDirectoryRARDialog.Filename;
+    LabelDiretorioRAR.Caption := SelectDirectoryRARDialog.Filename;
+    FormStorage.StoredValue['DiretorioRAR'] := SelectDirectoryRARDialog.Filename;
     FormStorage.Save;
   end
 end;
@@ -118,8 +115,8 @@ procedure TFormularioPrincipal.BtnPDFDirClick(Sender: TObject);
 begin
   if SelectDirectoryPDFDialog.Execute then
   begin
-    LabelDiretorioPDF.Caption:= SelectDirectoryPDFDialog.Filename;
-    FormStorage.StoredValue['DiretorioPDF']:= SelectDirectoryPDFDialog.Filename;
+    LabelDiretorioPDF.Caption := SelectDirectoryPDFDialog.Filename;
+    FormStorage.StoredValue['DiretorioPDF'] := SelectDirectoryPDFDialog.Filename;
     FormStorage.Save;
   end
 end;
@@ -128,8 +125,8 @@ procedure TFormularioPrincipal.BtnTIFDirClick(Sender: TObject);
 begin
   if SelectDirectoryTIFDialog.Execute then
   begin
-    LabelDiretorioTIF.Caption:= SelectDirectoryTIFDialog.Filename;
-    FormStorage.StoredValue['DiretorioTIF']:= SelectDirectoryTIFDialog.Filename;
+    LabelDiretorioTIF.Caption := SelectDirectoryTIFDialog.Filename;
+    FormStorage.StoredValue['DiretorioTIF'] := SelectDirectoryTIFDialog.Filename;
     FormStorage.Save;
   end
 end;
@@ -276,8 +273,10 @@ begin
     RunProgram.Execute;
     RunProgram.Free;
 
-    // Deleta PDF normal temporário.
     Arquivo := Matricula + '.pdf';
+    // Sincroniza arquivo com servidor
+    sincronizaArquivo(Arquivo);
+    // Deleta PDF normal temporário.
     if (FileExists(Arquivo)) then
     begin
       DeleteFile(Arquivo)
@@ -285,24 +284,62 @@ begin
     geraPDF := true;
 end;
 
-function TFormularioPrincipal.sincronizaArquivo(): boolean;
+// Sincroniza um arquivo para o servidor
+function TFormularioPrincipal.sincronizaArquivo(Arquivo: string): boolean;
 var
    Respo: TStringStream;
-   S: String;
+   S, FieldName: string;
 begin
+   FieldName := 'sendimage';
    With TFPHttpClient.Create(Nil) do
-    try
+   try
       Respo := TStringStream.Create('');
       FileFormPost('http://localhost/servico_sincronizacao/pdf_sincroniza.php',
-                   FieldName,
-                   FileName,
-                   Respo);
+                    FieldName,
+                    Arquivo,
+                    Respo);
       S := Respo.DataString;
-      BarraDeStatus.SimpleText:=S;
       Respo.Destroy;
-    finally
+   finally
       Free;
-    end;
+      if (S = '1') then    // Se sucesso
+      begin
+         BarraDeStatus.SimpleText := '';
+         sincronizaArquivo := true;
+         if (FileExists(Arquivo)) then
+         begin
+            DeleteFile(Arquivo)
+         end;
+      end
+      else
+      begin
+         BarraDeStatus.SimpleText := S;
+         CreateDir('pendentes');
+         RenameFile(Arquivo, 'pendentes/' + Arquivo);
+         sincronizaArquivo := false;
+      end;
+   end;
+end;
+
+// Ressincroniza arquivos pendentes
+function TFormularioPrincipal.ressincronizaArquivos(): boolean;
+var
+   ArquivosPendentes: TStringList;
+   I: integer;
+begin
+   ArquivosPendentes := TStringList.Create;
+   try
+      FindAllFiles(ArquivosPendentes, 'pendentes', '*.pdf', true);
+      ShowMessage(Format('Encontrados %d arquivos não sincronizados', [ArquivosPendentes.Count]));
+
+      for I := 0 to ArquivosPendentes.Count - 1 do
+      begin
+         sincronizaArquivo(ArquivosPendentes[I]);
+      end;
+
+      ressincronizaArquivos := true;
+   finally
+   end;
 end;
 
 // Gera TIF
@@ -313,13 +350,12 @@ var
    RunProgram: TProcess;
 begin
     // Gera diretório
-    SubdiretorioTif  := '00000000'; // Caso não entre no if abaixo
+    SubdiretorioTif := '00000000'; // Caso não entre no if abaixo
     if (Matricula.Length > 3) then
     begin
       SubdiretorioTif := '';
       for I := 1 to Matricula.Length - 3 do
       begin
-        //ShowMessage(Matricula[I]);
         SubdiretorioTif := SubdiretorioTif + Matricula[I];
       end;
       NomeTif := ''; // Usa o nometif como temporário somente
@@ -332,7 +368,7 @@ begin
 
     if not DirectoryExists(FormStorage.StoredValue['DiretorioTIF'] + '/' + SubdiretorioTif) then
     begin
-      if not CreateDir (FormStorage.StoredValue['DiretorioTIF'] + '/' + SubdiretorioTif) then
+      if not CreateDir(FormStorage.StoredValue['DiretorioTIF'] + '/' + SubdiretorioTif) then
       begin
         MessageDlg('Falha ao criar subdiretório Tif, crie manualmente uma pasta de nome ' + SubdiretorioTif + ' dentro de ' + FormStorage.StoredValue['DiretorioTIF'], mtError, mbOKCancel, 0);
         geraTif := false;
@@ -351,7 +387,7 @@ begin
 
     // Converte para TIF
     RunProgram := TProcess.Create(nil);
-    RunProgram.Executable:= 'magick';
+    RunProgram.Executable := 'magick';
 
     for I := 0 to DialogoImagens.Files.Count - 1 do
     begin
@@ -366,17 +402,18 @@ begin
 end;
 
 // Apaga arquivos de origem
-procedure TFormularioPrincipal.apagaArquivosOrigem;
+function TFormularioPrincipal.apagaArquivosOrigem(): boolean;
 var
    I: integer;
 begin
-  for I := 0 to DialogoImagens.Files.Count - 1 do
-  begin
-    if (FileExists(DialogoImagens.Files[I])) then
-    begin
-      DeleteFile(DialogoImagens.Files[I])
-    end;
-  end;
+   for I := 0 to DialogoImagens.Files.Count - 1 do
+   begin
+     if (FileExists(DialogoImagens.Files[I])) then
+     begin
+          DeleteFile(DialogoImagens.Files[I])
+     end;
+   end;
+   apagaArquivosOrigem := true;
 end;
 
 end.
