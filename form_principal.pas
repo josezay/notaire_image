@@ -295,7 +295,7 @@ begin
    With TFPHttpClient.Create(Nil) do
    try
       Respo := TStringStream.Create('');
-      FileFormPost('http://localhost/servico_sincronizacao/pdf_sincroniza.php?token=' + sha256('teste'),
+      FileFormPost('http://localhost/servico_sincronizacao/pdf_sincroniza.php?token=' + sha256(ExtractFileName(Arquivo) + '5313m31b31m@r'),
                     FieldName,
                     Arquivo,
                     Respo);
