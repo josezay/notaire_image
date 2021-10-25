@@ -308,7 +308,8 @@ begin
         S := Respo.DataString;
         Respo.Destroy;
      except
-        BarraDeStatus.SimpleText := 'Sem conexão com a internet';
+        ShowMessage('Ocorreu erro');
+
      end;
    finally
       Free;
