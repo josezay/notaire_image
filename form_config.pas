@@ -15,6 +15,7 @@ type
   TConfig = class(TForm)
     BtnConfigSalvar: TBitBtn;
     BtnConfigCancelar: TBitBtn;
+    CheckBoxRessincroniza: TCheckBox;
     EditDiretorioRemoto: TEdit;
     EditSenha: TEdit;
     ConfigStorage: TIniPropStorage;
@@ -45,6 +46,10 @@ begin
   ConfigStorage.Restore;
   EditDiretorioRemoto.Text  := ConfigStorage.StoredValue['DiretorioRemoto'];
   EditSenha.Text  := ConfigStorage.StoredValue['Senha'];
+  if (ConfigStorage.StoredValue['Ressincroniza'] = 'true') then
+  begin
+      CheckBoxRessincroniza.Checked := True;
+  end;
 end;
 
 procedure TConfig.BtnConfigCancelarClick(Sender: TObject);
@@ -55,8 +60,16 @@ end;
 procedure TConfig.BtnConfigSalvarClick(Sender: TObject);
 begin
    ConfigStorage.StoredValue['DiretorioRemoto'] := EditDiretorioRemoto.Text;
-   ConfigStorage.Save;
    ConfigStorage.StoredValue['Senha'] := EditSenha.Text;
+
+   if (CheckBoxRessincroniza.Checked) then
+   begin
+       ConfigStorage.StoredValue['Ressincroniza'] := 'true';
+   end
+   else
+   begin
+       ConfigStorage.StoredValue['Ressincroniza'] := 'false';
+   end;
    ConfigStorage.Save;
    Close;
 end;

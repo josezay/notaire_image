@@ -1656,7 +1656,9 @@ object FormularioPrincipal: TFormularioPrincipal
   end
   object DialogoImagens: TOpenDialog
     Title = 'Abrir arquivo'
-    Filter = 'Imagens|*.jpg; *.png; *.jpeg; *.bitmap'
+    FileName = 'C:\repositorios'
+    Filter = 'Imagens|*.jpg; *.png; *.jpeg; *.bitmap; *.bmp;'
+    InitialDir = 'C:\'
     Options = [ofAllowMultiSelect, ofEnableSizing, ofViewDetail]
     Left = 448
     Top = 72
