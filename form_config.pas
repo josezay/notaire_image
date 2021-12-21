@@ -15,6 +15,7 @@ type
   TConfig = class(TForm)
     BtnConfigSalvar: TBitBtn;
     BtnConfigCancelar: TBitBtn;
+    CheckBoxComprimirTIF: TCheckBox;
     CheckBoxRessincroniza: TCheckBox;
     EditDiretorioRemoto: TEdit;
     EditSenha: TEdit;
@@ -46,9 +47,15 @@ begin
   ConfigStorage.Restore;
   EditDiretorioRemoto.Text  := ConfigStorage.StoredValue['DiretorioRemoto'];
   EditSenha.Text  := ConfigStorage.StoredValue['Senha'];
+
   if (ConfigStorage.StoredValue['Ressincroniza'] = 'true') then
   begin
       CheckBoxRessincroniza.Checked := True;
+  end;
+
+  if (ConfigStorage.StoredValue['ComprimirTIF'] = 'true') then
+  begin
+      CheckBoxComprimirTIF.Checked := True;
   end;
 end;
 
@@ -70,6 +77,16 @@ begin
    begin
        ConfigStorage.StoredValue['Ressincroniza'] := 'false';
    end;
+
+   if (CheckBoxComprimirTIF.Checked) then
+   begin
+       ConfigStorage.StoredValue['ComprimirTIF'] := 'true';
+   end
+   else
+   begin
+       ConfigStorage.StoredValue['ComprimirTIF'] := 'false';
+   end;
+
    ConfigStorage.Save;
    Close;
 end;

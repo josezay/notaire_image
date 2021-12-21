@@ -1,7 +1,7 @@
 object Config: TConfig
-  Left = 733
+  Left = 831
   Height = 240
-  Top = 300
+  Top = 253
   Width = 320
   BorderIcons = []
   Caption = 'Configuração'
@@ -108,6 +108,18 @@ object Config: TConfig
     Caption = 'Ressincronizar PDFs pendentes ao abrir'
     TabOrder = 4
   end
+  object CheckBoxComprimirTIF: TCheckBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBoxRessincroniza
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 19
+    Top = 147
+    Width = 96
+    BorderSpacing.Around = 8
+    Caption = 'Comprimir TIF'
+    TabOrder = 5
+  end
   object ConfigStorage: TIniPropStorage
     StoredValues = <    
       item
@@ -119,6 +131,9 @@ object Config: TConfig
       end    
       item
         Name = 'Ressincroniza'
+      end    
+      item
+        Name = 'ComprimirTIF'
       end>
     IniFileName = 'config.ini'
     IniSection = 'config'

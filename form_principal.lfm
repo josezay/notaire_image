@@ -1,7 +1,7 @@
 object Principal: TPrincipal
-  Left = 294
+  Left = 337
   Height = 617
-  Top = 117
+  Top = 114
   Width = 932
   Caption = 'Notaire_image'
   ClientHeight = 617
@@ -1841,6 +1841,9 @@ object Principal: TPrincipal
       end    
       item
         Name = 'Ressincroniza'
+      end    
+      item
+        Name = 'ComprimirTIF'
       end>
     IniFileName = 'config.ini'
     IniSection = 'config'
