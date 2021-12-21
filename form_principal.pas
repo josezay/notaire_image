@@ -422,6 +422,8 @@ begin
        RunProgram.Parameters.Add(DialogoImagens.Files[I]);
     end;
 
+    RunProgram.Parameters.Add('-compress');
+    RunProgram.Parameters.Add('group4');
     RunProgram.Parameters.Add('"' + FormStorage.StoredValue['DiretorioTIF'] + '/' + SubdiretorioTif + '/' + NomeTif + '.tif');
     RunProgram.Options := RunProgram.Options + [poWaitOnExit];
     RunProgram.Execute;

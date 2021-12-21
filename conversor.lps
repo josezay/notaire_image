@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="23"/>
-        <UsageCount Value="108"/>
+        <UsageCount Value="116"/>
       </Unit0>
       <Unit1>
         <Filename Value="form_principal.pas"/>
@@ -20,9 +20,9 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="58"/>
-        <CursorPos Y="78"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="226"/>
+        <CursorPos Y="150"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -32,7 +32,7 @@
         <UnitName Value="Biblio"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="12"/>
-        <UsageCount Value="103"/>
+        <UsageCount Value="111"/>
       </Unit2>
       <Unit3>
         <Filename Value="form_config.pas"/>
@@ -42,7 +42,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="20"/>
         <CursorPos Y="37"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="49"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -51,7 +51,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3937"/>
         <CursorPos Y="3945"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit4>
       <Unit5>
         <Filename Value="unit1.lfm"/>
@@ -60,14 +60,14 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="4"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit5>
       <Unit6>
         <Filename Value="D:\lazarus\fpc\3.2.0\source\rtl\objpas\sysutils\finah.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="27"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit6>
       <Unit7>
         <Filename Value="D:\lazarus\lcl\inipropstorage.pas"/>
@@ -75,32 +75,32 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="32"/>
         <CursorPos Y="142"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit7>
       <Unit8>
         <Filename Value="C:\Users\JoseZay\Desktop\source\lib\dnssend.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit8>
       <Unit9>
         <Filename Value="C:\Sistemas\SYNAPSE\lib\ftptsend.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="183"/>
         <CursorPos X="24" Y="168"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit9>
       <Unit10>
         <Filename Value="C:\Sistemas\SYNAPSE\lib\httpsend.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="434"/>
         <CursorPos X="54" Y="441"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit10>
       <Unit11>
         <Filename Value="C:\lazarus\fpc\3.2.0\source\rtl\win32\system.pp"/>
         <UnitName Value="System"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit11>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
