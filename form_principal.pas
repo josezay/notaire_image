@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, PairSplitter, DCPsha256,
-  fphttpclient, FileUtil, form_config;
+  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, DCPsha256,
+  fphttpclient, FileUtil, CheckBoxThemed, form_config;
 
 type
 
@@ -15,11 +15,6 @@ type
 
   TPrincipal = class(TForm)
     BarraDeStatus: TStatusBar;
-    BtnAbrirImagens: TBitBtn;
-    BtnExecutar: TBitBtn;
-    BtnPDFDir: TBitBtn;
-    BtnRARDir: TBitBtn;
-    BtnTIFDir: TBitBtn;
     CampoNumeroMatricula: TEdit;
     CheckBoxApagarImagens: TCheckBox;
     CheckBoxCompactarImagens: TCheckBox;
@@ -36,23 +31,31 @@ type
     LabelNumeroMatricula: TLabel;
     ListaArquivos: TListBox;
     PageControl1: TPageControl;
+    PageControl2: TPageControl;
     PainelImagens: TPanel;
     ScrollBox1: TScrollBox;
     MenuToolBar: TToolBar;
     SelectDirectoryPDFDialog: TSelectDirectoryDialog;
     SelectDirectoryRARDialog: TSelectDirectoryDialog;
     SelectDirectoryTIFDialog: TSelectDirectoryDialog;
-    SpeedButton1: TSpeedButton;
-    SpeedButtonConfig: TSpeedButton;
+    BtnSair: TSpeedButton;
+    BtnRARDir: TSpeedButton;
+    BtnAbrirImagemMatricula: TSpeedButton;
+    BtnPDFDir: TSpeedButton;
+    BtnTIFDir: TSpeedButton;
+    BtnExecutarMatricula: TSpeedButton;
+    BtnConfig: TSpeedButton;
     TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    procedure BtnAbrirImagemMatriculaClick(Sender: TObject);
     procedure BtnPDFDirClick(Sender: TObject);
-    procedure BtnRARDirClick(Sender: TObject);
-    procedure BtnAbrirImagensClick(Sender: TObject);
-    procedure BtnExecutarClick(Sender: TObject);
     procedure BtnTIFDirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButtonConfigClick(Sender: TObject);
+    procedure BtnExecutarMatriculaClick(Sender: TObject);
+    procedure BtnAbrirImgMatriculaClick(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+    procedure BtnRARDirClick(Sender: TObject);
+    procedure BtnConfigClick(Sender: TObject);
     function valida(): boolean;
     function geraRAR(Matricula: string): boolean;
     function geraTIF(Matricula: string): boolean;
@@ -76,29 +79,23 @@ implementation
 
 { TPrincipal }
 
-procedure TPrincipal.SpeedButton1Click(Sender: TObject);
+procedure TPrincipal.FormCreate(Sender: TObject);
+begin
+  FormStorage.IniFileName := 'config.ini';
+  FormStorage.Restore;
+  ConfigStorage.IniFileName := 'config.ini';
+  ConfigStorage.Restore;
+  LabelDiretorioRAR.Caption := FormStorage.StoredValue['DiretorioRAR'];
+  LabelDiretorioPDF.Caption := FormStorage.StoredValue['DiretorioPDF'];
+  LabelDiretorioTIF.Caption := FormStorage.StoredValue['DiretorioTIF'];
+  ressincronizaArquivos;
+
+end;
+
+procedure TPrincipal.BtnSairClick(Sender: TObject);
 begin
     if QuestionDlg ('Sair','Deseja sair?',mtCustom,[mrYes,'Sim', mrNo, 'Não'],'') = mrYes then
       Close;
-end;
-
-procedure TPrincipal.SpeedButtonConfigClick(Sender: TObject);
-begin
-  Config.ShowModal;
-end;
-
-procedure TPrincipal.BtnAbrirImagensClick(Sender: TObject);
-var
-  I: integer;
-begin
-  if DialogoImagens.Execute then
-  begin
-    ListaArquivos.Items.Clear;
-    for I := 0 to DialogoImagens.Files.Count - 1 do
-    begin
-      ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));
-    end;
-  end;
 end;
 
 procedure TPrincipal.BtnRARDirClick(Sender: TObject);
@@ -107,6 +104,53 @@ begin
   begin
     LabelDiretorioRAR.Caption := SelectDirectoryRARDialog.Filename;
     FormStorage.StoredValue['DiretorioRAR'] := SelectDirectoryRARDialog.Filename;
+    FormStorage.Save;
+  end
+end;
+
+procedure TPrincipal.BtnExecutarMatriculaClick(Sender: TObject);
+var
+   Matricula: String;
+begin
+  Matricula := CampoNumeroMatricula.Text;
+  BtnExecutarMatricula.Enabled := false;
+  Principal.Update;
+
+  if valida then
+  begin
+      if (CheckBoxCompactarImagens.Checked) then
+      begin
+        geraRAR(Matricula);
+      end;
+
+      if (CheckBoxGerarPDF.Checked) then
+      begin
+        geraPDF(Matricula);
+      end;
+
+      if (CheckBoxGerarTIF.Checked) then
+      begin
+        if not (geraTIF(Matricula)) then ShowMessage('Ocorreu erro ao formar TIF!');
+      end;
+
+      if (CheckBoxApagarImagens.Checked) then
+      begin
+        apagaArquivosOrigem;
+      end;
+
+      ShowMessage('Concluido!');
+      BtnExecutarMatricula.Enabled:=true;
+  end;
+
+  BtnExecutarMatricula.Visible:=true;
+end;
+
+procedure TPrincipal.BtnTIFDirClick(Sender: TObject);
+begin
+  if SelectDirectoryTIFDialog.Execute then
+  begin
+    LabelDiretorioTIF.Caption := SelectDirectoryTIFDialog.Filename;
+    FormStorage.StoredValue['DiretorioTIF'] := SelectDirectoryTIFDialog.Filename;
     FormStorage.Save;
   end
 end;
@@ -121,57 +165,28 @@ begin
   end
 end;
 
-procedure TPrincipal.BtnTIFDirClick(Sender: TObject);
+procedure TPrincipal.BtnConfigClick(Sender: TObject);
 begin
-  if SelectDirectoryTIFDialog.Execute then
-  begin
-    LabelDiretorioTIF.Caption := SelectDirectoryTIFDialog.Filename;
-    FormStorage.StoredValue['DiretorioTIF'] := SelectDirectoryTIFDialog.Filename;
-    FormStorage.Save;
-  end
+  Config.ShowModal;
 end;
 
-procedure TPrincipal.FormCreate(Sender: TObject);
-begin
-  FormStorage.IniFileName := 'config.ini';
-  FormStorage.Restore;
-  ConfigStorage.IniFileName := 'config.ini';
-  ConfigStorage.Restore;
-  LabelDiretorioRAR.Caption := FormStorage.StoredValue['DiretorioRAR'];
-  LabelDiretorioPDF.Caption := FormStorage.StoredValue['DiretorioPDF'];
-  LabelDiretorioTIF.Caption := FormStorage.StoredValue['DiretorioTIF'];
-  ressincronizaArquivos;
-end;
-
-procedure TPrincipal.BtnExecutarClick(Sender: TObject);
+procedure TPrincipal.BtnAbrirImagemMatriculaClick(Sender: TObject);
 var
-   Matricula: String;
+  I: integer;
 begin
-  Matricula := CampoNumeroMatricula.Text;
-  if valida then
+  if DialogoImagens.Execute then
   begin
-    if (CheckBoxCompactarImagens.Checked) then
+    ListaArquivos.Items.Clear;
+    for I := 0 to DialogoImagens.Files.Count - 1 do
     begin
-      geraRAR(Matricula);
+      ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));
     end;
-
-    if (CheckBoxGerarPDF.Checked) then
-    begin
-      geraPDF(Matricula);
-    end;
-
-    if (CheckBoxGerarTIF.Checked) then
-    begin
-      if not (geraTIF(Matricula)) then ShowMessage('Ocorreu erro ao formar TIF!');
-    end;
-
-    if (CheckBoxApagarImagens.Checked) then
-    begin
-      apagaArquivosOrigem;
-    end;
-
-    ShowMessage('Concluido!');
   end;
+end;
+
+procedure TPrincipal.BtnAbrirImgMatriculaClick(Sender: TObject);
+begin
+
 end;
 
 // Validações
@@ -303,9 +318,7 @@ end;
 function TPrincipal.sincronizaArquivo(Arquivo: string): boolean;
 var
    Respo: TStringStream;
-   S, FieldName, Tamanho: string;
-   f : TextFile;
-   Info : TSearchRec;
+   S, FieldName: string;
 begin
    FieldName := 'file';
    With TFPHttpClient.Create(Nil) do
@@ -323,21 +336,6 @@ begin
      end;
    finally
       Free;
-      //if not (FileExists('log.csv')) then
-      //begin
-          // try
-           //   FileCreate('log.csv')
-          // finally
-         //  end;
-     // end;
-     // AssignFile(f,'log.csv');
-     // Append(f);
-
-     // If FindFirst(Arquivo,0,Info)=0 then
-     //     Tamanho := IntToStr(Info.SIze)
-     // else
-      //    Tamanho := '0';
-
       if (S = '1') then    // Se sucesso
       begin
          BarraDeStatus.SimpleText := '';
@@ -346,18 +344,14 @@ begin
          begin
             DeleteFile(Arquivo)
          end;
-        // Writeln (f, 'Sucesso ao sincronizar arquivo, ' + Arquivo + ', de tamanho, ' + Tamanho);
       end
       else
       begin
-        // Writeln (f, 'Erro ao sincronizar arquivo, ' + Arquivo + ', de tamanho, ' + Tamanho + ', retorno:,' + S);
          BarraDeStatus.SimpleText := S;
          CreateDir('pendentes');
          RenameFile(Arquivo, 'pendentes/' + Arquivo);
          sincronizaArquivo := false;
       end;
-     // CloseFile(f);
-      FindClose(Info);
    end;
 end;
 
