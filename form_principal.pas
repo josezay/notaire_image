@@ -16,6 +16,9 @@ type
   TPrincipal = class(TForm)
     BarraDeStatus: TStatusBar;
     CampoNumeroMatricula: TEdit;
+    CheckBoxApagarImagensAuxiliar: TCheckBox;
+    CheckBoxBackupAuxiliar: TCheckBox;
+    CheckBoxGerarPDFAuxiliar: TCheckBox;
     CheckBoxApagarImagens: TCheckBox;
     CheckBoxCompactarImagens: TCheckBox;
     CheckBoxEnviarNuvem: TCheckBox;
@@ -23,7 +26,9 @@ type
     CheckBoxGerarTIF: TCheckBox;
     ConfigStorage: TIniPropStorage;
     DialogoImagens: TOpenDialog;
+    CampoNumeroAuxiliar: TEdit;
     FormStorage: TIniPropStorage;
+    LabelNumeroAuxiliar: TLabel;
     LabelDiretorioPDF: TLabel;
     LabelDiretorioRAR: TLabel;
     LabelDiretorioTIF: TLabel;
@@ -35,26 +40,32 @@ type
     PainelImagens: TPanel;
     ScrollBox1: TScrollBox;
     MenuToolBar: TToolBar;
+    ScrollBox2: TScrollBox;
     SelectDirectoryPDFDialog: TSelectDirectoryDialog;
     SelectDirectoryRARDialog: TSelectDirectoryDialog;
     SelectDirectoryTIFDialog: TSelectDirectoryDialog;
     BtnSair: TSpeedButton;
-    BtnRARDir: TSpeedButton;
-    BtnAbrirImagemMatricula: TSpeedButton;
-    BtnPDFDir: TSpeedButton;
-    BtnTIFDir: TSpeedButton;
+    BtnRARDirMatricula: TSpeedButton;
+    BtnAbrirImagem: TSpeedButton;
+    BtnPDFDirMatricula: TSpeedButton;
+    BtnTIFDirMatricula: TSpeedButton;
     BtnExecutarMatricula: TSpeedButton;
     BtnConfig: TSpeedButton;
+    BtnExecutarAuxiliar: TSpeedButton;
+    BtnPDFDirAuxiliar: TSpeedButton;
+    LabelDiretorioPDFDirAuxiliar: TStaticText;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
-    procedure BtnAbrirImagemMatriculaClick(Sender: TObject);
+    TabSheet3: TTabSheet;
+    procedure BtnAbrirImagemClick(Sender: TObject);
+    procedure BtnPDFDirAuxiliarClick(Sender: TObject);
     procedure BtnPDFDirClick(Sender: TObject);
-    procedure BtnTIFDirClick(Sender: TObject);
+    procedure BtnTIFDirMatriculaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnExecutarMatriculaClick(Sender: TObject);
     procedure BtnAbrirImgMatriculaClick(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);
-    procedure BtnRARDirClick(Sender: TObject);
+    procedure BtnRARDirMatriculaClick(Sender: TObject);
     procedure BtnConfigClick(Sender: TObject);
     function valida(): boolean;
     function geraRAR(Matricula: string): boolean;
@@ -79,6 +90,9 @@ implementation
 
 { TPrincipal }
 
+//**********Eventos gerais *****************************************************
+
+// Ao iniciar
 procedure TPrincipal.FormCreate(Sender: TObject);
 begin
   FormStorage.IniFileName := 'config.ini';
@@ -92,13 +106,38 @@ begin
 
 end;
 
+//Ao clicar para sair
 procedure TPrincipal.BtnSairClick(Sender: TObject);
 begin
     if QuestionDlg ('Sair','Deseja sair?',mtCustom,[mrYes,'Sim', mrNo, 'Não'],'') = mrYes then
       Close;
 end;
 
-procedure TPrincipal.BtnRARDirClick(Sender: TObject);
+//Ao clicar para configurar
+procedure TPrincipal.BtnConfigClick(Sender: TObject);
+begin
+  Config.ShowModal;
+end;
+
+//Ao clicar para abrir imagem
+procedure TPrincipal.BtnAbrirImagemClick(Sender: TObject);
+var
+  I: integer;
+begin
+  if DialogoImagens.Execute then
+  begin
+    ListaArquivos.Items.Clear;
+    for I := 0 to DialogoImagens.Files.Count - 1 do
+    begin
+      ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));
+    end;
+  end;
+end;
+
+//**********Eventos Matricula***************************************************
+
+//Ao clicar para escolha do destino do RAR da Matrícula
+procedure TPrincipal.BtnRARDirMatriculaClick(Sender: TObject);
 begin
   if SelectDirectoryRARDialog.Execute then
   begin
@@ -108,6 +147,29 @@ begin
   end
 end;
 
+//Ao clicar para escolha do destino do TIF da Matrícula
+procedure TPrincipal.BtnTIFDirMatriculaClick(Sender: TObject);
+begin
+  if SelectDirectoryTIFDialog.Execute then
+  begin
+    LabelDiretorioTIF.Caption := SelectDirectoryTIFDialog.Filename;
+    FormStorage.StoredValue['DiretorioTIF'] := SelectDirectoryTIFDialog.Filename;
+    FormStorage.Save;
+  end
+end;
+
+//Ao clicar para escolha do destino do PDF da Matrícula
+procedure TPrincipal.BtnPDFDirClick(Sender: TObject);
+begin
+  if SelectDirectoryPDFDialog.Execute then
+  begin
+    LabelDiretorioPDF.Caption := SelectDirectoryPDFDialog.Filename;
+    FormStorage.StoredValue['DiretorioPDF'] := SelectDirectoryPDFDialog.Filename;
+    FormStorage.Save;
+  end
+end;
+
+//Ao clicar para executar a conversão e backup
 procedure TPrincipal.BtnExecutarMatriculaClick(Sender: TObject);
 var
    Matricula: String;
@@ -145,49 +207,26 @@ begin
   BtnExecutarMatricula.Visible:=true;
 end;
 
-procedure TPrincipal.BtnTIFDirClick(Sender: TObject);
-begin
-  if SelectDirectoryTIFDialog.Execute then
-  begin
-    LabelDiretorioTIF.Caption := SelectDirectoryTIFDialog.Filename;
-    FormStorage.StoredValue['DiretorioTIF'] := SelectDirectoryTIFDialog.Filename;
-    FormStorage.Save;
-  end
-end;
 
-procedure TPrincipal.BtnPDFDirClick(Sender: TObject);
-begin
-  if SelectDirectoryPDFDialog.Execute then
-  begin
-    LabelDiretorioPDF.Caption := SelectDirectoryPDFDialog.Filename;
-    FormStorage.StoredValue['DiretorioPDF'] := SelectDirectoryPDFDialog.Filename;
-    FormStorage.Save;
-  end
-end;
+//**********Eventos Auxiliar****************************************************
 
-procedure TPrincipal.BtnConfigClick(Sender: TObject);
-begin
-  Config.ShowModal;
-end;
-
-procedure TPrincipal.BtnAbrirImagemMatriculaClick(Sender: TObject);
-var
-  I: integer;
-begin
-  if DialogoImagens.Execute then
-  begin
-    ListaArquivos.Items.Clear;
-    for I := 0 to DialogoImagens.Files.Count - 1 do
-    begin
-      ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));
-    end;
-  end;
-end;
-
-procedure TPrincipal.BtnAbrirImgMatriculaClick(Sender: TObject);
+//Ao clicar para escolha do destino do PDF do Auxiliar
+procedure TPrincipal.BtnPDFDirAuxiliarClick(Sender: TObject);
 begin
 
 end;
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Validações
 function TPrincipal.valida(): boolean;

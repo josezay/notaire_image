@@ -13,8 +13,6 @@ type
   { TConfig }
 
   TConfig = class(TForm)
-    BtnConfigSalvar: TBitBtn;
-    BtnConfigCancelar: TBitBtn;
     CheckBoxComprimirTIF: TCheckBox;
     CheckBoxRessincroniza: TCheckBox;
     EditDiretorioRemoto: TEdit;
@@ -22,8 +20,10 @@ type
     ConfigStorage: TIniPropStorage;
     LabelDiretorio: TLabel;
     LabelSenha: TLabel;
+    BtnConfigGravar: TSpeedButton;
+    BtnConfigCancelar: TSpeedButton;
     procedure BtnConfigCancelarClick(Sender: TObject);
-    procedure BtnConfigSalvarClick(Sender: TObject);
+    procedure BtnConfigGravarClick(Sender: TObject);
     procedure ConfigStorageRestoreProperties(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -59,12 +59,7 @@ begin
   end;
 end;
 
-procedure TConfig.BtnConfigCancelarClick(Sender: TObject);
-begin
-  Close;
-end;
-
-procedure TConfig.BtnConfigSalvarClick(Sender: TObject);
+procedure TConfig.BtnConfigGravarClick(Sender: TObject);
 begin
    ConfigStorage.StoredValue['DiretorioRemoto'] := EditDiretorioRemoto.Text;
    ConfigStorage.StoredValue['Senha'] := EditSenha.Text;
@@ -89,6 +84,11 @@ begin
 
    ConfigStorage.Save;
    Close;
+end;
+
+procedure TConfig.BtnConfigCancelarClick(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TConfig.ConfigStorageRestoreProperties(Sender: TObject);
