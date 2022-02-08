@@ -1,12 +1,12 @@
 object Principal: TPrincipal
-  Left = 348
+  Left = 336
   Height = 655
-  Top = 125
+  Top = 156
   Width = 848
   AllowDropFiles = True
   Caption = 'Notaire_image'
-  ClientHeight = 655
-  ClientWidth = 848
+  ClientHeight = 0
+  ClientWidth = 0
   Color = 15134950
   Icon.Data = {
     1E980000000001000100685A0000010020000898000016000000280000006800
@@ -2559,7 +2559,8 @@ object Principal: TPrincipal
       end>
     IniFileName = 'config.ini'
     IniSection = 'diretorios'
-    Left = 776
+    Left = 752
+    Top = 8
   end
   object ConfigStorage: TIniPropStorage
     StoredValues = <    
@@ -2581,7 +2582,8 @@ object Principal: TPrincipal
       end>
     IniFileName = 'config.ini'
     IniSection = 'config'
-    Left = 808
+    Left = 784
+    Top = 8
   end
   object DirectoryPDFAuxiliar: TSelectDirectoryDialog
     Left = 688

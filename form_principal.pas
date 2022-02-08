@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, JSONPropStorage,
-  DCPsha256, fphttpclient, FileUtil, form_config, fpjson, jsonparser;
+  DCPsha256, fphttpclient, FileUtil, form_config, PQConnection, mysql40conn;
 
 type
 
@@ -489,6 +489,7 @@ function TPrincipal.sincronizaArquivo(Numero: string; Tipo: integer): boolean;
 var
     Respo: TStringStream;
     S, Arquivo: string;
+    //tfOut: TextFile;
 begin
     if (Tipo = 2) then
     begin
@@ -521,28 +522,17 @@ begin
         end
         else
         begin
+            if (Tipo = 2) then
+            begin
+                CreateDir(ConfigStorage.StoredValue['DiretorioPendencias'] + '/matriculas/');
+                CopyFile(Arquivo, ConfigStorage.StoredValue['DiretorioPendencias'] + '/matriculas/' + Numero + '.pdf');   // Copia o arquivo original na pasta pendentes.
+            end;
 
-
-
-
-            //BarraDeStatus.SimpleText := 'Erro ao sincronizar com Nuvem';
-            //JSON.JSONFileName := ConfigStorage.StoredValue['DiretorioPendencias'] + '/pendencias.json';
-            //JSON.RootObjectPath := IntToStr(Tipo);
-            //JSON.WriteString(Numero, FormatDateTime('DD MM YYYY hh:nn:ss', Now) + ' - ' + S);
-            ////JSON.Free;
-            //JSON.Save;
-
-            //if (Tipo = 2) then
-            //begin
-            //    CreateDir('matriculas_pendentes');
-            //    CopyFile(Arquivo, 'matriculas_pendentes/' + Numero + '.pdf');   // Copia o arquivo original na pasta pendentes.
-            //end;
-            //
-            //if (Tipo = 3) then
-            //begin
-            //    CreateDir('auxiliares_pendentes');
-            //    CopyFile(Arquivo, 'auxiliares_pendentes/' + Numero + '.pdf');
-            //end;
+            if (Tipo = 3) then
+            begin
+                CreateDir(ConfigStorage.StoredValue['DiretorioPendencias'] + '/auxiliares/');
+                CopyFile(Arquivo, ConfigStorage.StoredValue['DiretorioPendencias'] + '/auxiliares/' + Numero + '.pdf');
+            end;
 
             sincronizaArquivo := false;
         end;
