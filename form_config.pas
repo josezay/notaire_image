@@ -24,9 +24,9 @@ type
     LabelSenha: TLabel;
     BtnConfigGravar: TSpeedButton;
     BtnConfigCancelar: TSpeedButton;
-    DiretorioPendencias: TOpenDialog;
     PanelSecreto: TPanel;
     BtnDirPendencias: TSpeedButton;
+    DiretorioPendencias: TSelectDirectoryDialog;
     procedure BtnConfigCancelarClick(Sender: TObject);
     procedure BtnConfigGravarClick(Sender: TObject);
     procedure BtnDirPendenciasClick(Sender: TObject);
@@ -53,6 +53,9 @@ begin
   ConfigStorage.Restore;
   EditDiretorioRemoto.Text  := ConfigStorage.StoredValue['DiretorioRemoto'];
   EditSenha.Text  := ConfigStorage.StoredValue['Senha'];
+
+  LabelDirPendencias.Caption := ConfigStorage.StoredValue['DiretorioPendencias'];
+  DiretorioPendencias.InitialDir := ConfigStorage.StoredValue['DiretorioPendencias'];
 
   if (ConfigStorage.StoredValue['Ressincroniza'] = 'true') then
   begin

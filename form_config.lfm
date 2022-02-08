@@ -1,7 +1,7 @@
 object Config: TConfig
-  Left = 474
+  Left = 475
   Height = 506
-  Top = 139
+  Top = 141
   Width = 497
   AllowDropFiles = True
   AutoSize = True
@@ -493,7 +493,6 @@ object Config: TConfig
     ClientHeight = 33
     ClientWidth = 481
     TabOrder = 4
-    Visible = False
     object Label1: TLabel
       AnchorSideLeft.Control = PanelSecreto
       AnchorSideTop.Control = PanelSecreto
@@ -590,7 +589,7 @@ object Config: TConfig
     Left = 456
     Top = 464
   end
-  object DiretorioPendencias: TOpenDialog
+  object DiretorioPendencias: TSelectDirectoryDialog
     Left = 416
     Top = 464
   end

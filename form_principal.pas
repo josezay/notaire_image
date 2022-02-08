@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, DCPsha256,
-  fphttpclient, FileUtil, form_config;
+  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus, JSONPropStorage,
+  DCPsha256, fphttpclient, FileUtil, form_config, fpjson, jsonparser;
 
 type
 
@@ -87,6 +87,7 @@ type
 
 var
   Principal: TPrincipal;
+  Imagens: array of String;                                                     // Lista de arquivos, pode ser populada pelo diálogo de abertura de imagens, ou arrastando as imagens sobre o programa.
 
 implementation
 
@@ -119,6 +120,8 @@ begin
     DirectoryPDFMatricula.InitialDir := FormStorage.StoredValue['DiretorioPDFMatricula'];
     DirectoryTIFMatricula.InitialDir := FormStorage.StoredValue['DiretorioTIFMatricula'];
     DirectoryPDFAuxiliar.InitialDir  := FormStorage.StoredValue['DiretorioPDFAuxiliar'];
+
+    //JSON.JSONFileName := ConfigStorage.StoredValue['DiretorioPendencias'] + '/pendencias.json';
 end;
 
 // Ao clicar para sair
@@ -131,7 +134,7 @@ end;
 // Ao clicar para configurar
 procedure TPrincipal.BtnConfigClick(Sender: TObject);
 begin
-    Config.ShowModal;
+    Config.ShowModal;                                                           // Chama a tela de configuração.
 end;
 
 procedure TPrincipal.FormDropFiles(Sender: TObject;
@@ -139,13 +142,18 @@ procedure TPrincipal.FormDropFiles(Sender: TObject;
 var
   I: Integer;
 begin
-    ListaArquivos.Items.Clear;
-    for I := Low(FileNames) to High(FileNames) do
+    ListaArquivos.Items.Clear;                                                  // A lista é somente para exibir quais arquivos estão abertos, no formato simples, para melhor visualização.
+    SetLength(Imagens, Length(FileNames));                                      // Define o tamanho da array que irá comportar os nomes completos dos arquivos e de onde as conversões irão consultar.
+    for I := Low(FileNames) to High(FileNames) do                               // Do primeiro ao último arquivo no drag and drop.
     begin
-        ListaArquivos.items.add(FileNames[I]);
+        if ((ExtractFileExt(FileNames[I]) = '.jpg') Or (ExtractFileExt(FileNames[I]) = '.png') Or (ExtractFileExt(FileNames[I]) = '.bmp')) then
+        begin
+            Imagens[I] := FileNames[I];                                         // Popula a array de imagens.
+            ListaArquivos.items.add(ExtractFileName(FileNames[I]));             // Mostra o nome do arquivo simples, sem o diretório, para fins de visualização somente.
+        end;
     end;
 
-    ProgressBarMatricula.Visible := false;                                  // Ao escolher novas imagens esconde as barras de progresso.
+    ProgressBarMatricula.Visible := false;                                      // Ao escolher novas imagens esconde as barras de progresso.
     ProgressBarAuxiliar.Visible  := false;
 end;
 
@@ -154,12 +162,14 @@ procedure TPrincipal.BtnAbrirImagemClick(Sender: TObject);
 var
     I: integer;
 begin
-    if DialogoImagens.Execute then
+    if DialogoImagens.Execute then                                              // Chama a janela para escolher os arquivos.
     begin
-        ListaArquivos.Items.Clear;
-        for I := 0 to DialogoImagens.Files.Count - 1 do
+        ListaArquivos.Items.Clear;                                              // Limpa a lista visual.
+        SetLength(Imagens, DialogoImagens.Files.Count);                         // Define a array de imagens com tamanho que comporte a quantidade de arquivos escolhidos.
+        for I := 0 to DialogoImagens.Files.Count - 1 do                         // Para cada arquivo escolhido.
         begin
-            ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));
+            Imagens[I] := DialogoImagens.Files[I];                              // Insere o nome e diretório do arquivo no array de imagens
+            ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));  // Mostra em tela o nome simples.
         end;
 
         ProgressBarMatricula.Visible := false;                                  // Ao escolher novas imagens esconde as barras de progresso.
@@ -211,8 +221,8 @@ var
     Matricula: String;
 begin
     Matricula := CampoNumeroMatricula.Text;
-    BtnExecutarMatricula.Enabled  := false;
-    ProgressBarMatricula.Visible  := true;
+    BtnExecutarMatricula.Enabled  := false;                                     // Desabilita o botão.
+    ProgressBarMatricula.Visible  := true;                                      // Deixa visível a barra de progresso.
     ProgressBarMatricula.Position := 0;
     Principal.Update;                                                           // Atualiza o formulário para que o botão executar apareça desabilitado antes que as atividades de conversão iniciem.
 
@@ -314,15 +324,17 @@ var
 begin
     // Validações gerais;
     valida := true;
-    if (ListaArquivos.Items.Count = 0) then
+    if (Length(Imagens) = 0) then                                               // Se não ouverem imagens carregadas.
     begin
         MessageDlg('É necessário escolher ao menos uma imagem!', mtError, mbOKCancel, 0);
-        if DialogoImagens.Execute then
+        if DialogoImagens.Execute then                                          // Se arquivos foram escolhidos.
         begin
-            ListaArquivos.Items.Clear;
-            for I := 0 to DialogoImagens.Files.Count - 1 do
+            ListaArquivos.Items.Clear;                                          // Limpa na tela a lista.
+            SetLength(Imagens, DialogoImagens.Files.Count);                     // Define o tamanho da array de imagens para que comporte as imagens escolhidas.
+            for I := 0 to DialogoImagens.Files.Count - 1 do                     // Para cada arquivo escolhido.
             begin
-                ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));
+                Imagens[I] := DialogoImagens.Files[I];                          // Adicina o arquivo na lista para ser processado.
+                ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I])); // Mostra o nome simples na tela.
             end;
             valida := false;
             Exit;
@@ -396,9 +408,9 @@ begin
     RunProgram.Parameters.Add('-ep1');                                          // Sem manter estrutura de arquivos
     RunProgram.Parameters.Add('"' + FormStorage.StoredValue['DiretorioRARMatricula'] + '/' + Matricula + '.rar"');
 
-    for I := 0 to DialogoImagens.Files.Count - 1 do
+    for I := Low(Imagens) to High(Imagens) do
     begin
-        RunProgram.Parameters.Add(DialogoImagens.Files[I]);
+        RunProgram.Parameters.Add(Imagens[I]);
     end;
 
     RunProgram.Options := RunProgram.Options + [poWaitOnExit];
@@ -420,9 +432,9 @@ begin
     RunProgram := TProcess.Create(nil);
     RunProgram.Executable := 'magick';
 
-    for I := 0 to DialogoImagens.Files.Count - 1 do
+    for I := Low(Imagens) to High(Imagens) do
     begin
-        RunProgram.Parameters.Add(DialogoImagens.Files[I]);
+        RunProgram.Parameters.Add(Imagens[I]);
     end;
 
     RunProgram.Parameters.Add(Numero + '.pdf');
@@ -480,12 +492,12 @@ var
 begin
     if (Tipo = 2) then
     begin
-        Arquivo := StringReplace(FormStorage.StoredValue['DiretorioPDFMatricula'], '\', '/',[rfReplaceAll]) + '/' + Numero + '.pdf';
+        Arquivo := StringReplace(FormStorage.StoredValue['DiretorioPDFMatricula'], '\', '/', [rfReplaceAll]) + '/' + Numero + '.pdf';
     end;
 
     if (Tipo = 3) then
     begin
-        Arquivo := StringReplace(FormStorage.StoredValue['DiretorioPDFAuxiliar'], '\', '/',[rfReplaceAll]) + '/' + Numero + '.pdf';
+        Arquivo := StringReplace(FormStorage.StoredValue['DiretorioPDFAuxiliar'], '\', '/', [rfReplaceAll]) + '/' + Numero + '.pdf';
     end;
 
     With TFPHttpClient.Create(Nil) do
@@ -509,18 +521,28 @@ begin
         end
         else
         begin
-            BarraDeStatus.SimpleText := 'Erro ao sincronizar com Nuvem';
-            if (Tipo = 2) then
-            begin
-                CreateDir('matriculas_pendentes');
-                CopyFile(Arquivo, 'matriculas_pendentes/' + Numero + '.pdf');   // Copia o arquivo original na pasta pendentes.
-            end;
 
-            if (Tipo = 3) then
-            begin
-                CreateDir('auxiliares_pendentes');
-                CopyFile(Arquivo, 'auxiliares_pendentes/' + Numero + '.pdf');
-            end;
+
+
+
+            //BarraDeStatus.SimpleText := 'Erro ao sincronizar com Nuvem';
+            //JSON.JSONFileName := ConfigStorage.StoredValue['DiretorioPendencias'] + '/pendencias.json';
+            //JSON.RootObjectPath := IntToStr(Tipo);
+            //JSON.WriteString(Numero, FormatDateTime('DD MM YYYY hh:nn:ss', Now) + ' - ' + S);
+            ////JSON.Free;
+            //JSON.Save;
+
+            //if (Tipo = 2) then
+            //begin
+            //    CreateDir('matriculas_pendentes');
+            //    CopyFile(Arquivo, 'matriculas_pendentes/' + Numero + '.pdf');   // Copia o arquivo original na pasta pendentes.
+            //end;
+            //
+            //if (Tipo = 3) then
+            //begin
+            //    CreateDir('auxiliares_pendentes');
+            //    CopyFile(Arquivo, 'auxiliares_pendentes/' + Numero + '.pdf');
+            //end;
 
             sincronizaArquivo := false;
         end;
@@ -533,7 +555,7 @@ var
     ArquivosPendentes: TStringList;
     I: integer;
 begin
-    ArquivosPendentes:= TStringList.Create;
+    ArquivosPendentes := TStringList.Create;
     try
         if (ConfigStorage.StoredValue['Ressincroniza'] = 'true') then
         begin
@@ -611,9 +633,9 @@ begin
     RunProgram := TProcess.Create(nil);
     RunProgram.Executable := 'magick';
 
-    for I := 0 to DialogoImagens.Files.Count - 1 do
+    for I := Low(Imagens) to High(Imagens) do
     begin
-        RunProgram.Parameters.Add(DialogoImagens.Files[I]);
+        RunProgram.Parameters.Add(Imagens[I]);
     end;
 
     if (ConfigStorage.StoredValue['ComprimirTif'] = 'true') then                // Comprime o tif (preto e branco) se marcado para tal na configuração.
@@ -635,15 +657,16 @@ function TPrincipal.apagaArquivosOrigem(): boolean;
 var
     I: integer;
 begin
-    for I := 0 to DialogoImagens.Files.Count - 1 do
+    for I := Low(Imagens) to High(Imagens) do
     begin
-        if (FileExists(DialogoImagens.Files[I])) then
+        if (FileExists(Imagens[I])) then
         begin
-            DeleteFile(DialogoImagens.Files[I])
+            DeleteFile(Imagens[I])
         end;
     end;
 
     ListaArquivos.Clear;
+    SetLength(Imagens, 0);
     apagaArquivosOrigem := true;
 end;
 
