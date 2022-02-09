@@ -1357,12 +1357,12 @@ object Principal: TPrincipal
     Height = 598
     Top = 30
     Width = 840
-    ActivePage = TabSheet4
+    ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 4
     ImagesWidth = 16
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Conversão e Backup'
@@ -2143,6 +2143,7 @@ object Principal: TPrincipal
               2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF
             }
             Transparent = False
+            OnClick = BtnExecutarMatriculaClick
           end
           object ProgressBarMatricula: TProgressBar
             AnchorSideLeft.Control = BtnExecutarMatricula
