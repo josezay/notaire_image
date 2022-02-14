@@ -113,24 +113,27 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="5">
+    <RequiredPackages Count="6">
       <Item1>
-        <PackageName Value="laz_synapse"/>
+        <PackageName Value="SynEdit"/>
       </Item1>
       <Item2>
-        <PackageName Value="dcpcrypt_laz"/>
+        <PackageName Value="laz_synapse"/>
       </Item2>
       <Item3>
-        <PackageName Value="dcpcrypt"/>
+        <PackageName Value="dcpcrypt_laz"/>
       </Item3>
       <Item4>
-        <PackageName Value="FCL"/>
+        <PackageName Value="dcpcrypt"/>
       </Item4>
       <Item5>
-        <PackageName Value="LCL"/>
+        <PackageName Value="FCL"/>
       </Item5>
+      <Item6>
+        <PackageName Value="LCL"/>
+      </Item6>
     </RequiredPackages>
-    <Units Count="6">
+    <Units Count="7">
       <Unit0>
         <Filename Value="conversor.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -160,10 +163,15 @@
         <UnitName Value="Biblio"/>
       </Unit4>
       <Unit5>
-        <Filename Value="biblio.pas"/>
+        <Filename Value="auxiliar.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="Biblio"/>
+        <UnitName Value="Auxiliar"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="consultanuvemlocal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ConsultaNuvemLocal"/>
+      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

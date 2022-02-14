@@ -1,14 +1,14 @@
 object Config: TConfig
-  Left = 475
-  Height = 506
-  Top = 141
-  Width = 497
+  Left = 561
+  Height = 576
+  Top = 158
+  Width = 554
   AllowDropFiles = True
   AutoSize = True
   BorderIcons = []
   Caption = 'Configuração'
-  ClientHeight = 506
-  ClientWidth = 497
+  ClientHeight = 576
+  ClientWidth = 554
   Color = clNone
   OnCreate = FormCreate
   OnDropFiles = FormDropFiles
@@ -19,9 +19,10 @@ object Config: TConfig
     Left = 8
     Height = 15
     Top = 8
-    Width = 131
-    BorderSpacing.Around = 8
-    Caption = 'Diretório notaire remoto:'
+    Width = 133
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Diretório Notaire remoto:'
     ParentColor = False
   end
   object EditDiretorioRemoto: TEdit
@@ -33,10 +34,11 @@ object Config: TConfig
     Left = 8
     Height = 23
     Hint = 'http://localhost/notaire/'
-    Top = 31
-    Width = 481
+    Top = 23
+    Width = 538
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Around = 8
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
     Constraints.MinWidth = 300
     MaxLength = 200
     ParentShowHint = False
@@ -45,13 +47,14 @@ object Config: TConfig
   end
   object LabelSenha: TLabel
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = EditDiretorioRemoto
+    AnchorSideTop.Control = EditDiretorioLocal
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 15
-    Top = 62
+    Top = 100
     Width = 32
-    BorderSpacing.Around = 8
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
     Caption = 'Senha'
     ParentColor = False
   end
@@ -63,10 +66,11 @@ object Config: TConfig
     AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 23
-    Top = 85
-    Width = 481
+    Top = 115
+    Width = 538
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Around = 8
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
     EchoMode = emPassword
     MaxLength = 30
     PasswordChar = '*'
@@ -78,7 +82,7 @@ object Config: TConfig
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 19
-    Top = 116
+    Top = 146
     Width = 225
     BorderSpacing.Around = 8
     Caption = 'Ressincronizar PDFs pendentes ao abrir'
@@ -91,7 +95,7 @@ object Config: TConfig
     AnchorSideTop.Side = asrBottom
     Left = 8
     Height = 19
-    Top = 143
+    Top = 173
     Width = 96
     BorderSpacing.Around = 8
     Caption = 'Comprimir TIF'
@@ -105,7 +109,7 @@ object Config: TConfig
     AnchorSideBottom.Side = asrBottom
     Left = 8
     Height = 22
-    Top = 170
+    Top = 200
     Width = 79
     AutoSize = True
     BorderSpacing.Left = 8
@@ -297,7 +301,7 @@ object Config: TConfig
     AnchorSideBottom.Side = asrBottom
     Left = 87
     Height = 22
-    Top = 170
+    Top = 200
     Width = 79
     AutoSize = True
     BorderSpacing.Bottom = 8
@@ -487,12 +491,12 @@ object Config: TConfig
     AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 33
-    Top = 200
-    Width = 481
+    Top = 230
+    Width = 538
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 8
     ClientHeight = 33
-    ClientWidth = 481
+    ClientWidth = 538
     TabOrder = 4
     Visible = False
     object Label1: TLabel
@@ -568,6 +572,35 @@ object Config: TConfig
       ParentColor = False
     end
   end
+  object EditDiretorioLocal: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 69
+    Width = 538
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    Constraints.MinWidth = 300
+    TabOrder = 5
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = EditDiretorioRemoto
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 54
+    Width = 116
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Diretório Notaire local'
+    ParentColor = False
+  end
   object ConfigStorage: TIniPropStorage
     StoredValues = <    
       item
@@ -588,11 +621,11 @@ object Config: TConfig
       end>
     IniFileName = 'config.ini'
     IniSection = 'config'
-    Left = 456
-    Top = 464
+    Left = 512
+    Top = 536
   end
   object DiretorioPendencias: TSelectDirectoryDialog
-    Left = 416
-    Top = 464
+    Left = 480
+    Top = 536
   end
 end

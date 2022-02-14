@@ -5,9 +5,9 @@ unit form_principal;
 interface
 
 uses
-  Classes, SysUtils, process, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  ComCtrls, Buttons, StdCtrls, IniPropStorage, Menus,
-  DCPsha256, fphttpclient, FileUtil, form_config;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
+  Buttons, StdCtrls, IniPropStorage, Menus, FileUtil, SynEdit, form_config,
+  mysql55conn, SQLDB;
 
 type
 
@@ -28,6 +28,7 @@ type
     CampoNumeroAuxiliar: TEdit;
     DialogoImagens: TOpenDialog;
     FormStorage: TIniPropStorage;
+    GroupBox1: TGroupBox;
     LabelNumeroAuxiliar: TLabel;
     LabelPDFMatricula: TLabel;
     LabelRARMatricula: TLabel;
@@ -35,8 +36,11 @@ type
     LabelListaArquivos: TLabel;
     LabelNumeroMatricula: TLabel;
     ListaArquivos: TListBox;
+    Memo: TMemo;
+    MySQL: TMySQL55Connection;
     PageControl1: TPageControl;
     PageControl2: TPageControl;
+    PageControl3: TPageControl;
     PainelImagens: TPanel;
     ProgressBarAuxiliar: TProgressBar;
     ProgressBarMatricula: TProgressBar;
@@ -57,20 +61,26 @@ type
     BtnPDFDirAuxiliar: TSpeedButton;
     LabelPDFAuxiliar: TStaticText;
     DirectoryPDFAuxiliar: TSelectDirectoryDialog;
+    BtnConsultarNuvemXLocal: TSpeedButton;
+    SQLTransaction: TSQLTransaction;
+    SynServidor: TSynEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
     procedure BtnAbrirImagemClick(Sender: TObject);
     procedure BtnExecutarAuxiliarClick(Sender: TObject);
+    procedure BtnExecutarMatriculaClick(Sender: TObject);
     procedure BtnPDFDirAuxiliarClick(Sender: TObject);
     procedure BtnPDFDirMatriculaClick(Sender: TObject);
+    procedure BtnRARDirMatriculaClick(Sender: TObject);
     procedure BtnTIFDirMatriculaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure BtnExecutarMatriculaClick(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);
-    procedure BtnRARDirMatriculaClick(Sender: TObject);
     procedure BtnConfigClick(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
+    procedure BtnConsultarNuvemXLocalClick(Sender: TObject);
   private
 
   public
@@ -83,14 +93,13 @@ var
 
 implementation
 
-uses Biblio;
+uses Matricula, Auxiliar, ConsultaNuvemLocal;
 
 {$R *.lfm}
 
 { TPrincipal }
 
 //********** Eventos gerais ****************************************************
-
 // Ao iniciar
 procedure TPrincipal.FormCreate(Sender: TObject);
 begin
@@ -100,17 +109,8 @@ begin
     FormStorage.Restore;
     ConfigStorage.Restore;
 
-    // Define os labels dos diretórios com os dados das configurações
-    LabelRARMatricula.Caption := FormStorage.StoredValue['DiretorioRARMatricula'];
-    LabelPDFMatricula.Caption := FormStorage.StoredValue['DiretorioPDFMatricula'];
-    LabelTIFMatricula.Caption := FormStorage.StoredValue['DiretorioTIFMatricula'];
-    LabelPDFAuxiliar.Caption  := FormStorage.StoredValue['DiretorioPDFAuxiliar'];
-
-    // Define a pasta inicial para os diálogos de diretório
-    DirectoryRARMatricula.InitialDir := FormStorage.StoredValue['DiretorioRARMatricula'];
-    DirectoryPDFMatricula.InitialDir := FormStorage.StoredValue['DiretorioPDFMatricula'];
-    DirectoryTIFMatricula.InitialDir := FormStorage.StoredValue['DiretorioTIFMatricula'];
-    DirectoryPDFAuxiliar.InitialDir  := FormStorage.StoredValue['DiretorioPDFAuxiliar'];
+    Matricula.Inicializar();
+    Auxiliar.Inicializar();
 end;
 
 // Ao clicar para sair
@@ -166,175 +166,44 @@ begin
     end;
 end;
 
-//********** Eventos Matricula *************************************************
-
-// Ao clicar para escolha do destino do RAR da Matrícula
+//********** Eventos Matricula **************************************************
 procedure TPrincipal.BtnRARDirMatriculaClick(Sender: TObject);
 begin
-    if DirectoryRARMatricula.Execute then
-    begin
-        LabelRARMatricula.Caption := DirectoryRARMatricula.Filename;
-        DirectoryRARMatricula.InitialDir := DirectoryRARMatricula.Filename;
-        FormStorage.StoredValue['DiretorioRARMatricula'] := DirectoryRARMatricula.Filename;
-        FormStorage.Save;
-    end
+    Matricula.RARDir();
 end;
 
-// Ao clicar para escolha do destino do PDF da Matrícula
 procedure TPrincipal.BtnPDFDirMatriculaClick(Sender: TObject);
 begin
-    if DirectoryPDFMatricula.Execute then
-    begin
-        LabelPDFMatricula.Caption := DirectoryPDFMatricula.Filename;
-        DirectoryPDFMatricula.InitialDir := DirectoryPDFMatricula.Filename;
-        FormStorage.StoredValue['DiretorioPDFMatricula'] := DirectoryPDFMatricula.Filename;
-        FormStorage.Save;
-    end
+    Matricula.PDFDir();
 end;
 
-// Ao clicar para escolha do destino do TIF da Matrícula
 procedure TPrincipal.BtnTIFDirMatriculaClick(Sender: TObject);
 begin
-    if DirectoryTIFMatricula.Execute then
-    begin
-        LabelTIFMatricula.Caption := DirectoryTIFMatricula.Filename;
-        DirectoryTIFMatricula.InitialDir := DirectoryTIFMatricula.Filename;
-        FormStorage.StoredValue['DiretorioTIFMatricula'] := DirectoryTIFMatricula.Filename;
-        FormStorage.Save;
-    end
+    Matricula.TIFDir();
 end;
 
-// Ao clicar para executar a conversão e backup da matrícula
 procedure TPrincipal.BtnExecutarMatriculaClick(Sender: TObject);
-var
-    Matricula: String;
-    Erro: boolean;
 begin
-    Matricula := CampoNumeroMatricula.Text;
-    BtnExecutarMatricula.Enabled  := false;                                     // Desabilita o botão.
-    ProgressBarMatricula.Visible  := true;                                      // Deixa visível a barra de progresso.
-    ProgressBarMatricula.Position := 0;
-    Principal.Update;                                                           // Atualiza o formulário para que o botão executar apareça desabilitado antes que as atividades de conversão iniciem.
-    Erro := false;
-
-    if valida(2) then
-    begin
-        ProgressBarMatricula.Position := 10;
-        if (CheckBoxGerarRARMatricula.Checked) then
-        begin
-            if not (geraRAR(Matricula)) then
-            begin
-                ShowMessage('Ocorreu erro ao formar RAR!');
-                Erro := true;
-            end;
-        end;
-
-        ProgressBarMatricula.Position := 30;
-        Principal.Update;
-
-        if (CheckBoxGerarPDFMatricula.Checked) then
-        begin
-            if not (geraPDF(Matricula, 2)) then
-            begin
-                ShowMessage('Ocorreu erro ao formar PDF!');
-                Erro := true;
-            end;
-        end;
-
-        ProgressBarMatricula.Position := 40;
-        Principal.Update;
-
-        if (CheckBoxGerarTIFMatricula.Checked) then
-        begin
-            if not (Biblio.geraTIF(Matricula)) then
-            begin
-                ShowMessage('Ocorreu erro ao formar TIF!');
-                Erro := true;
-            end;
-        end;
-
-        ProgressBarMatricula.Position := 90;
-        Principal.Update;
-
-        if (CheckBoxApagarImagensMatricula.Checked) then
-        begin
-            if not (Biblio.apagaArquivosOrigem) then
-            begin
-                ShowMessage('Ocorreu erro ao apagar arquivos temporários!');
-                Erro := true;
-            end;
-            Principal.Update;
-        end;
-
-        ProgressBarMatricula.Position := 100;
-
-        if not (Erro) then
-            ShowMessage('Concluido!');
-    end;
-
-    BtnExecutarMatricula.Enabled:=true;
+    Matricula.Executar();
 end;
 
 //********** Eventos Auxiliar **************************************************
 // Ao clicar para escolha do destino do PDF do Auxiliar
 procedure TPrincipal.BtnPDFDirAuxiliarClick(Sender: TObject);
 begin
-    if DirectoryPDFAuxiliar.Execute then
-    begin
-        LabelPDFAuxiliar.Caption := DirectoryPDFAuxiliar.Filename;
-        DirectoryPDFAuxiliar.InitialDir := DirectoryPDFAuxiliar.Filename;
-        FormStorage.StoredValue['DiretorioPDFAuxiliar'] := DirectoryPDFAuxiliar.Filename;
-        FormStorage.Save;
-    end
+    Auxiliar.PDFDir();
 end;
 
 // Ao clicar para executar a conversão e backup do Auxiliar
 procedure TPrincipal.BtnExecutarAuxiliarClick(Sender: TObject);
-var
-    Auxiliar: String;
-    Erro: boolean;
 begin
-    Auxiliar := CampoNumeroAuxiliar.Text;
-    BtnExecutarAuxiliar.Enabled  := false;
-    ProgressBarAuxiliar.Visible  := true;
-    ProgressBarAuxiliar.Position := 0;
-    Erro := false;
-    Principal.Update;                                                           // Atualiza o formulário para que o botão executar apareça desabilitado antes que as atividades de conversão iniciem.
-
-    if valida(3) then
-    begin
-        ProgressBarAuxiliar.Position := 20;
-        if (CheckBoxGerarPDFAuxiliar.Checked) then
-        begin
-            if not (geraPDF(Auxiliar, 3)) then
-            begin
-                ShowMessage('Ocorreu erro ao gerar PDF!');
-                Erro := true;
-            end;
-        end;
-
-        ProgressBarAuxiliar.Position := 70;
-        Principal.Update;
-
-        if (CheckBoxApagarImagensAuxiliar.Checked) then
-        begin
-            if not (apagaArquivosOrigem) then
-            begin
-                ShowMessage('Ocorreu erro ao apagar arquivos temporários!');
-                Erro := true;
-            end;
-            Principal.Update;
-        end;
-
-        ProgressBarAuxiliar.Position := 100;
-        Principal.Update;
-
-        if not (Erro) then
-            ShowMessage('Concluido!');
-    end;
-
-    BtnExecutarAuxiliar.Enabled := true;
+    Auxiliar.Executar();
 end;
 
+//********* Eventos Conferência Backup *****************************************
+procedure TPrincipal.BtnConsultarNuvemXLocalClick(Sender: TObject);
+begin
+    ConsultaNuvemLocal.Conferir();
+end;
 
 end.

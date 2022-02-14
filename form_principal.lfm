@@ -1,7 +1,7 @@
 object Principal: TPrincipal
-  Left = 442
+  Left = 406
   Height = 655
-  Top = 139
+  Top = 141
   Width = 848
   AllowDropFiles = True
   Caption = 'Notaire_image'
@@ -1357,12 +1357,12 @@ object Principal: TPrincipal
     Height = 598
     Top = 30
     Width = 840
-    ActivePage = TabSheet1
+    ActivePage = TabSheet4
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 4
     ImagesWidth = 16
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Conversão e Backup'
@@ -1648,11 +1648,10 @@ object Principal: TPrincipal
             AnchorSideTop.Side = asrBottom
             Left = 8
             Height = 23
-            Top = 31
+            Top = 23
             Width = 128
             BidiMode = bdRightToLeft
             BorderSpacing.Left = 8
-            BorderSpacing.Top = 8
             BorderSpacing.Right = 8
             MaxLength = 8
             NumbersOnly = True
@@ -1680,15 +1679,15 @@ object Principal: TPrincipal
             AnchorSideBottom.Control = TabSheet2
             AnchorSideBottom.Side = asrBottom
             Left = 8
-            Height = 428
-            Top = 62
+            Height = 436
+            Top = 54
             Width = 368
             HorzScrollBar.Page = 137
             VertScrollBar.Page = 143
             Anchors = [akTop, akLeft, akRight, akBottom]
             BorderSpacing.Bottom = 28
             BorderSpacing.Around = 8
-            ClientHeight = 424
+            ClientHeight = 432
             ClientWidth = 364
             Color = 26112
             ParentColor = False
@@ -1857,6 +1856,7 @@ object Principal: TPrincipal
                 0000000000000000000000000000000000000000000000000000000000000000
                 0000000000000000000000000000000000000000000000000000
               }
+              OnClick = BtnRARDirMatriculaClick
             end
             object BtnPDFDirMatricula: TSpeedButton
               AnchorSideLeft.Control = CheckBoxGerarPDFMatricula
@@ -1905,6 +1905,7 @@ object Principal: TPrincipal
                 0000000000000000000000000000000000000000000000000000000000000000
                 0000000000000000000000000000000000000000000000000000
               }
+              OnClick = BtnPDFDirMatriculaClick
             end
             object BtnTIFDirMatricula: TSpeedButton
               AnchorSideLeft.Control = CheckBoxGerarTIFMatricula
@@ -1952,6 +1953,7 @@ object Principal: TPrincipal
                 0000000000000000000000000000000000000000000000000000000000000000
                 0000000000000000000000000000000000000000000000000000
               }
+              OnClick = BtnTIFDirMatriculaClick
             end
           end
           object BtnExecutarMatricula: TSpeedButton
@@ -2177,7 +2179,8 @@ object Principal: TPrincipal
             Height = 15
             Top = 8
             Width = 123
-            BorderSpacing.Around = 8
+            BorderSpacing.Left = 8
+            BorderSpacing.Top = 8
             Caption = 'N° do registro auxiliar*:'
             ParentColor = False
           end
@@ -2187,9 +2190,9 @@ object Principal: TPrincipal
             AnchorSideTop.Side = asrBottom
             Left = 8
             Height = 23
-            Top = 31
+            Top = 23
             Width = 128
-            BorderSpacing.Around = 8
+            BorderSpacing.Left = 8
             NumbersOnly = True
             TabOrder = 0
           end
@@ -2202,15 +2205,15 @@ object Principal: TPrincipal
             AnchorSideBottom.Control = TabSheet3
             AnchorSideBottom.Side = asrBottom
             Left = 8
-            Height = 428
-            Top = 62
+            Height = 436
+            Top = 54
             Width = 368
             HorzScrollBar.Page = 181
             VertScrollBar.Page = 89
             Anchors = [akTop, akLeft, akRight, akBottom]
             BorderSpacing.Bottom = 28
             BorderSpacing.Around = 8
-            ClientHeight = 424
+            ClientHeight = 432
             ClientWidth = 364
             TabOrder = 1
             object CheckBoxGerarPDFAuxiliar: TCheckBox
@@ -2532,26 +2535,747 @@ object Principal: TPrincipal
       Caption = 'Conferência do Backup'
       ClientHeight = 570
       ClientWidth = 832
-      object Panel1: TPanel
+      object PageControl3: TPageControl
         AnchorSideLeft.Control = TabSheet4
         AnchorSideTop.Control = TabSheet4
         AnchorSideRight.Control = TabSheet4
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet4
         AnchorSideBottom.Side = asrBottom
-        Left = 4
-        Height = 562
-        Top = 4
-        Width = 824
+        Left = 8
+        Height = 554
+        Top = 8
+        Width = 816
+        ActivePage = TabSheet5
         Anchors = [akTop, akLeft, akRight, akBottom]
-        BorderSpacing.Around = 4
-        BevelOuter = bvNone
-        BevelWidth = 2
-        BorderWidth = 1
-        BorderStyle = bsSingle
-        Color = clWhite
-        ParentColor = False
+        BorderSpacing.Around = 8
+        TabIndex = 0
         TabOrder = 0
+        object TabSheet5: TTabSheet
+          Caption = 'Nuvem x Local'
+          ClientHeight = 526
+          ClientWidth = 808
+          object BtnConsultarNuvemXLocal: TSpeedButton
+            AnchorSideLeft.Control = TabSheet5
+            AnchorSideTop.Control = TabSheet5
+            Left = 8
+            Height = 22
+            Top = 8
+            Width = 79
+            AutoSize = True
+            BorderSpacing.Around = 8
+            Color = clNone
+            Flat = True
+            Glyph.Data = {
+              4E150000424D4E1500000000000036000000280000004B000000120000000100
+              20000000000018150000640000006400000000000000000000002A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F
+              2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFFE4EF
+              EAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F
+              2BFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F
+              2BFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EF
+              EAFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EF
+              EAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F
+              2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F
+              2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EF
+              EAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F
+              2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EF
+              EAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F
+              2BFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F
+              2BFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFFE4EF
+              EAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F
+              2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EF
+              EAFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F
+              2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFF2A7F2BFF2A7F2BFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EFEAFFE4EF
+              EAFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F
+              2BFF2A7F2BFF2A7F2BFF2A7F2BFF2A7F2BFF
+            }
+            Transparent = False
+            OnClick = BtnConsultarNuvemXLocalClick
+          end
+          object GroupBox1: TGroupBox
+            AnchorSideLeft.Control = TabSheet5
+            AnchorSideTop.Side = asrBottom
+            AnchorSideRight.Control = TabSheet5
+            AnchorSideRight.Side = asrBottom
+            AnchorSideBottom.Control = TabSheet5
+            AnchorSideBottom.Side = asrBottom
+            Left = 8
+            Height = 286
+            Top = 232
+            Width = 792
+            Anchors = [akTop, akLeft, akRight, akBottom]
+            BorderSpacing.Around = 8
+            Caption = 'Resultado'
+            ClientHeight = 266
+            ClientWidth = 788
+            TabOrder = 0
+            object Memo: TMemo
+              AnchorSideLeft.Control = GroupBox1
+              AnchorSideTop.Control = GroupBox1
+              AnchorSideRight.Control = GroupBox1
+              AnchorSideRight.Side = asrBottom
+              AnchorSideBottom.Control = GroupBox1
+              AnchorSideBottom.Side = asrBottom
+              Left = 0
+              Height = 266
+              Top = 0
+              Width = 788
+              Anchors = [akTop, akLeft, akRight, akBottom]
+              TabOrder = 0
+            end
+          end
+          inline SynServidor: TSynEdit
+            AnchorSideLeft.Control = BtnConsultarNuvemXLocal
+            AnchorSideTop.Control = BtnConsultarNuvemXLocal
+            AnchorSideTop.Side = asrBottom
+            AnchorSideRight.Control = TabSheet5
+            AnchorSideRight.Side = asrBottom
+            Left = 8
+            Height = 186
+            Top = 38
+            Width = 800
+            Anchors = [akTop, akLeft, akRight]
+            Font.Height = -13
+            Font.Name = 'Courier New'
+            Font.Pitch = fpFixed
+            Font.Quality = fqNonAntialiased
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 1
+            Gutter.Width = 57
+            Gutter.MouseActions = <>
+            RightGutter.Width = 0
+            RightGutter.MouseActions = <>
+            Keystrokes = <            
+              item
+                Command = ecUp
+                ShortCut = 38
+              end            
+              item
+                Command = ecSelUp
+                ShortCut = 8230
+              end            
+              item
+                Command = ecScrollUp
+                ShortCut = 16422
+              end            
+              item
+                Command = ecDown
+                ShortCut = 40
+              end            
+              item
+                Command = ecSelDown
+                ShortCut = 8232
+              end            
+              item
+                Command = ecScrollDown
+                ShortCut = 16424
+              end            
+              item
+                Command = ecLeft
+                ShortCut = 37
+              end            
+              item
+                Command = ecSelLeft
+                ShortCut = 8229
+              end            
+              item
+                Command = ecWordLeft
+                ShortCut = 16421
+              end            
+              item
+                Command = ecSelWordLeft
+                ShortCut = 24613
+              end            
+              item
+                Command = ecRight
+                ShortCut = 39
+              end            
+              item
+                Command = ecSelRight
+                ShortCut = 8231
+              end            
+              item
+                Command = ecWordRight
+                ShortCut = 16423
+              end            
+              item
+                Command = ecSelWordRight
+                ShortCut = 24615
+              end            
+              item
+                Command = ecPageDown
+                ShortCut = 34
+              end            
+              item
+                Command = ecSelPageDown
+                ShortCut = 8226
+              end            
+              item
+                Command = ecPageBottom
+                ShortCut = 16418
+              end            
+              item
+                Command = ecSelPageBottom
+                ShortCut = 24610
+              end            
+              item
+                Command = ecPageUp
+                ShortCut = 33
+              end            
+              item
+                Command = ecSelPageUp
+                ShortCut = 8225
+              end            
+              item
+                Command = ecPageTop
+                ShortCut = 16417
+              end            
+              item
+                Command = ecSelPageTop
+                ShortCut = 24609
+              end            
+              item
+                Command = ecLineStart
+                ShortCut = 36
+              end            
+              item
+                Command = ecSelLineStart
+                ShortCut = 8228
+              end            
+              item
+                Command = ecEditorTop
+                ShortCut = 16420
+              end            
+              item
+                Command = ecSelEditorTop
+                ShortCut = 24612
+              end            
+              item
+                Command = ecLineEnd
+                ShortCut = 35
+              end            
+              item
+                Command = ecSelLineEnd
+                ShortCut = 8227
+              end            
+              item
+                Command = ecEditorBottom
+                ShortCut = 16419
+              end            
+              item
+                Command = ecSelEditorBottom
+                ShortCut = 24611
+              end            
+              item
+                Command = ecToggleMode
+                ShortCut = 45
+              end            
+              item
+                Command = ecCopy
+                ShortCut = 16429
+              end            
+              item
+                Command = ecPaste
+                ShortCut = 8237
+              end            
+              item
+                Command = ecDeleteChar
+                ShortCut = 46
+              end            
+              item
+                Command = ecCut
+                ShortCut = 8238
+              end            
+              item
+                Command = ecDeleteLastChar
+                ShortCut = 8
+              end            
+              item
+                Command = ecDeleteLastChar
+                ShortCut = 8200
+              end            
+              item
+                Command = ecDeleteLastWord
+                ShortCut = 16392
+              end            
+              item
+                Command = ecUndo
+                ShortCut = 32776
+              end            
+              item
+                Command = ecRedo
+                ShortCut = 40968
+              end            
+              item
+                Command = ecLineBreak
+                ShortCut = 13
+              end            
+              item
+                Command = ecSelectAll
+                ShortCut = 16449
+              end            
+              item
+                Command = ecCopy
+                ShortCut = 16451
+              end            
+              item
+                Command = ecBlockIndent
+                ShortCut = 24649
+              end            
+              item
+                Command = ecLineBreak
+                ShortCut = 16461
+              end            
+              item
+                Command = ecInsertLine
+                ShortCut = 16462
+              end            
+              item
+                Command = ecDeleteWord
+                ShortCut = 16468
+              end            
+              item
+                Command = ecBlockUnindent
+                ShortCut = 24661
+              end            
+              item
+                Command = ecPaste
+                ShortCut = 16470
+              end            
+              item
+                Command = ecCut
+                ShortCut = 16472
+              end            
+              item
+                Command = ecDeleteLine
+                ShortCut = 16473
+              end            
+              item
+                Command = ecDeleteEOL
+                ShortCut = 24665
+              end            
+              item
+                Command = ecUndo
+                ShortCut = 16474
+              end            
+              item
+                Command = ecRedo
+                ShortCut = 24666
+              end            
+              item
+                Command = ecGotoMarker0
+                ShortCut = 16432
+              end            
+              item
+                Command = ecGotoMarker1
+                ShortCut = 16433
+              end            
+              item
+                Command = ecGotoMarker2
+                ShortCut = 16434
+              end            
+              item
+                Command = ecGotoMarker3
+                ShortCut = 16435
+              end            
+              item
+                Command = ecGotoMarker4
+                ShortCut = 16436
+              end            
+              item
+                Command = ecGotoMarker5
+                ShortCut = 16437
+              end            
+              item
+                Command = ecGotoMarker6
+                ShortCut = 16438
+              end            
+              item
+                Command = ecGotoMarker7
+                ShortCut = 16439
+              end            
+              item
+                Command = ecGotoMarker8
+                ShortCut = 16440
+              end            
+              item
+                Command = ecGotoMarker9
+                ShortCut = 16441
+              end            
+              item
+                Command = ecSetMarker0
+                ShortCut = 24624
+              end            
+              item
+                Command = ecSetMarker1
+                ShortCut = 24625
+              end            
+              item
+                Command = ecSetMarker2
+                ShortCut = 24626
+              end            
+              item
+                Command = ecSetMarker3
+                ShortCut = 24627
+              end            
+              item
+                Command = ecSetMarker4
+                ShortCut = 24628
+              end            
+              item
+                Command = ecSetMarker5
+                ShortCut = 24629
+              end            
+              item
+                Command = ecSetMarker6
+                ShortCut = 24630
+              end            
+              item
+                Command = ecSetMarker7
+                ShortCut = 24631
+              end            
+              item
+                Command = ecSetMarker8
+                ShortCut = 24632
+              end            
+              item
+                Command = ecSetMarker9
+                ShortCut = 24633
+              end            
+              item
+                Command = EcFoldLevel1
+                ShortCut = 41009
+              end            
+              item
+                Command = EcFoldLevel2
+                ShortCut = 41010
+              end            
+              item
+                Command = EcFoldLevel3
+                ShortCut = 41011
+              end            
+              item
+                Command = EcFoldLevel4
+                ShortCut = 41012
+              end            
+              item
+                Command = EcFoldLevel5
+                ShortCut = 41013
+              end            
+              item
+                Command = EcFoldLevel6
+                ShortCut = 41014
+              end            
+              item
+                Command = EcFoldLevel7
+                ShortCut = 41015
+              end            
+              item
+                Command = EcFoldLevel8
+                ShortCut = 41016
+              end            
+              item
+                Command = EcFoldLevel9
+                ShortCut = 41017
+              end            
+              item
+                Command = EcFoldLevel0
+                ShortCut = 41008
+              end            
+              item
+                Command = EcFoldCurrent
+                ShortCut = 41005
+              end            
+              item
+                Command = EcUnFoldCurrent
+                ShortCut = 41003
+              end            
+              item
+                Command = EcToggleMarkupWord
+                ShortCut = 32845
+              end            
+              item
+                Command = ecNormalSelect
+                ShortCut = 24654
+              end            
+              item
+                Command = ecColumnSelect
+                ShortCut = 24643
+              end            
+              item
+                Command = ecLineSelect
+                ShortCut = 24652
+              end            
+              item
+                Command = ecTab
+                ShortCut = 9
+              end            
+              item
+                Command = ecShiftTab
+                ShortCut = 8201
+              end            
+              item
+                Command = ecMatchBracket
+                ShortCut = 24642
+              end            
+              item
+                Command = ecColSelUp
+                ShortCut = 40998
+              end            
+              item
+                Command = ecColSelDown
+                ShortCut = 41000
+              end            
+              item
+                Command = ecColSelLeft
+                ShortCut = 40997
+              end            
+              item
+                Command = ecColSelRight
+                ShortCut = 40999
+              end            
+              item
+                Command = ecColSelPageDown
+                ShortCut = 40994
+              end            
+              item
+                Command = ecColSelPageBottom
+                ShortCut = 57378
+              end            
+              item
+                Command = ecColSelPageUp
+                ShortCut = 40993
+              end            
+              item
+                Command = ecColSelPageTop
+                ShortCut = 57377
+              end            
+              item
+                Command = ecColSelLineStart
+                ShortCut = 40996
+              end            
+              item
+                Command = ecColSelLineEnd
+                ShortCut = 40995
+              end            
+              item
+                Command = ecColSelEditorTop
+                ShortCut = 57380
+              end            
+              item
+                Command = ecColSelEditorBottom
+                ShortCut = 57379
+              end>
+            MouseActions = <>
+            MouseTextActions = <>
+            MouseSelActions = <>
+            VisibleSpecialChars = [vscSpace, vscTabAtLast]
+            SelectedColor.BackPriority = 50
+            SelectedColor.ForePriority = 50
+            SelectedColor.FramePriority = 50
+            SelectedColor.BoldPriority = 50
+            SelectedColor.ItalicPriority = 50
+            SelectedColor.UnderlinePriority = 50
+            SelectedColor.StrikeOutPriority = 50
+            BracketHighlightStyle = sbhsBoth
+            BracketMatchColor.Background = clNone
+            BracketMatchColor.Foreground = clNone
+            BracketMatchColor.Style = [fsBold]
+            FoldedCodeColor.Background = clNone
+            FoldedCodeColor.Foreground = clGray
+            FoldedCodeColor.FrameColor = clGray
+            MouseLinkColor.Background = clNone
+            MouseLinkColor.Foreground = clBlue
+            LineHighlightColor.Background = clNone
+            LineHighlightColor.Foreground = clNone
+            inline SynLeftGutterPartList1: TSynGutterPartList
+              object SynGutterMarks1: TSynGutterMarks
+                Width = 24
+                MouseActions = <>
+              end
+              object SynGutterLineNumber1: TSynGutterLineNumber
+                Width = 17
+                MouseActions = <>
+                MarkupInfo.Background = clBtnFace
+                MarkupInfo.Foreground = clNone
+                DigitCount = 2
+                ShowOnlyLineNumbersMultiplesOf = 1
+                ZeroStart = False
+                LeadingZeros = False
+              end
+              object SynGutterChanges1: TSynGutterChanges
+                Width = 4
+                MouseActions = <>
+                ModifiedColor = 59900
+                SavedColor = clGreen
+              end
+              object SynGutterSeparator1: TSynGutterSeparator
+                Width = 2
+                MouseActions = <>
+                MarkupInfo.Background = clWhite
+                MarkupInfo.Foreground = clGray
+              end
+              object SynGutterCodeFolding1: TSynGutterCodeFolding
+                MouseActions = <>
+                MarkupInfo.Background = clNone
+                MarkupInfo.Foreground = clGray
+                MouseActionsExpanded = <>
+                MouseActionsCollapsed = <>
+              end
+            end
+          end
+        end
       end
     end
   end
@@ -2617,8 +3341,30 @@ object Principal: TPrincipal
     Title = 'Abrir arquivos'
     DefaultExt = '.png'
     Filter = 'Imagens|*.jpg; *.png; *.jpeg; *.bitmap; *.bmp'
-    Options = [ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing, ofViewDetail, ofAutoPreview]
+    Options = [ofAllowMultiSelect, ofEnableSizing, ofViewDetail]
     Left = 592
+    Top = 8
+  end
+  object MySQL: TMySQL55Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'db_notaire_h'
+    KeepConnection = False
+    Params.Strings = (
+      'Port=3306'
+    )
+    Password = 'vertrigo'
+    Transaction = SQLTransaction
+    UserName = 'root'
+    HostName = '127.0.0.1'
+    SkipLibraryVersionCheck = False
+    Left = 560
+    Top = 8
+  end
+  object SQLTransaction: TSQLTransaction
+    Active = False
+    Database = MySQL
+    Left = 528
     Top = 8
   end
 end
