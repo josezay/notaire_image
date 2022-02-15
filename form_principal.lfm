@@ -3281,10 +3281,10 @@ object Principal: TPrincipal
           end
           object Label1: TLabel
             AnchorSideLeft.Control = TabSheet5
-            AnchorSideTop.Control = BtnConsultarNuvemXLocal
             AnchorSideTop.Side = asrBottom
             Left = 8
             Height = 15
+            Hint = 'http://homologador.compuniao.com.br/notaire/varredura_arquivos.php'
             Top = 38
             Width = 159
             BorderSpacing.Left = 8
@@ -3292,6 +3292,8 @@ object Principal: TPrincipal
             BorderSpacing.Right = 8
             Caption = 'String retornada pelo servidor:'
             ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
           end
         end
       end
@@ -3345,6 +3347,9 @@ object Principal: TPrincipal
       end    
       item
         Name = 'DiretorioPendencias'
+      end    
+      item
+        Name = 'Admin'
       end>
     IniFileName = 'config.ini'
     IniSection = 'config'

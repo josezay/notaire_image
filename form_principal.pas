@@ -111,6 +111,11 @@ begin
     FormStorage.Restore;
     ConfigStorage.Restore;
 
+    if (ConfigStorage.StoredValue['Admin'] = 'true') then
+    begin
+        TabConferencia.TabVisible := true;
+    end;
+
     Matricula.Inicializar();
     Auxiliar.Inicializar();
 end;

@@ -13,6 +13,7 @@ type
   { TConfig }
 
   TConfig = class(TForm)
+    CheckBoxAdmin: TCheckBox;
     CheckBoxComprimirTIF: TCheckBox;
     CheckBoxRessincroniza: TCheckBox;
     EditDiretorioLocal: TEdit;
@@ -70,6 +71,11 @@ begin
   begin
       CheckBoxComprimirTIF.Checked := True;
   end;
+
+  if (ConfigStorage.StoredValue['Admin'] = 'true') then
+  begin
+      CheckBoxAdmin.Checked := True;
+  end;
 end;
 
 procedure TConfig.FormDropFiles(Sender: TObject;
@@ -100,6 +106,15 @@ begin
     else
     begin
         ConfigStorage.StoredValue['ComprimirTIF'] := 'false';
+    end;
+
+    if (CheckBoxAdmin.Checked) then
+    begin
+        ConfigStorage.StoredValue['Admin'] := 'true';
+    end
+    else
+    begin
+        ConfigStorage.StoredValue['Admin'] := 'false';
     end;
 
     ConfigStorage.Save;
