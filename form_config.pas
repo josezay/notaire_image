@@ -45,6 +45,8 @@ var
 
 implementation
 
+uses form_principal;
+
 {$R *.lfm}
 
 { TConfig }
@@ -78,29 +80,30 @@ end;
 
 procedure TConfig.BtnConfigGravarClick(Sender: TObject);
 begin
-   ConfigStorage.StoredValue['DiretorioRemoto'] := EditDiretorioRemoto.Text;
-   ConfigStorage.StoredValue['Senha'] := EditSenha.Text;
+    Principal.TabConferencia.TabVisible := True;
+    ConfigStorage.StoredValue['DiretorioRemoto'] := EditDiretorioRemoto.Text;
+    ConfigStorage.StoredValue['Senha'] := EditSenha.Text;
 
-   if (CheckBoxRessincroniza.Checked) then
-   begin
-       ConfigStorage.StoredValue['Ressincroniza'] := 'true';
-   end
-   else
-   begin
-       ConfigStorage.StoredValue['Ressincroniza'] := 'false';
-   end;
+    if (CheckBoxRessincroniza.Checked) then
+    begin
+        ConfigStorage.StoredValue['Ressincroniza'] := 'true';
+    end
+    else
+    begin
+        ConfigStorage.StoredValue['Ressincroniza'] := 'false';
+    end;
 
-   if (CheckBoxComprimirTIF.Checked) then
-   begin
-       ConfigStorage.StoredValue['ComprimirTIF'] := 'true';
-   end
-   else
-   begin
-       ConfigStorage.StoredValue['ComprimirTIF'] := 'false';
-   end;
+    if (CheckBoxComprimirTIF.Checked) then
+    begin
+        ConfigStorage.StoredValue['ComprimirTIF'] := 'true';
+    end
+    else
+    begin
+        ConfigStorage.StoredValue['ComprimirTIF'] := 'false';
+    end;
 
-   ConfigStorage.Save;
-   Close;
+    ConfigStorage.Save;
+    Close;
 end;
 
 procedure TConfig.BtnDirPendenciasClick(Sender: TObject);
@@ -116,7 +119,7 @@ end;
 
 procedure TConfig.BtnConfigCancelarClick(Sender: TObject);
 begin
-  Close;
+    Close;
 end;
 
 end.

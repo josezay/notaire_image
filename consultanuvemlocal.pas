@@ -5,7 +5,7 @@ unit ConsultaNuvemLocal;
 interface
 
 uses
-  Classes, SysUtils, fphttpclient, Dialogs, FileUtil;
+  Classes, SysUtils, fphttpclient, Dialogs, FileUtil, process;
 
 procedure Conferir();
 
@@ -16,16 +16,20 @@ uses form_principal;
 procedure Conferir();
 var
     ArrArquivos, ArrRegistro, ArrTipo: TStringArray;
-    S, Arquivo: string;
+    S, Arquivo, FileName, SubPasta: string;
     I: integer;
+    Sincronizado: Boolean;
+    RunProgram: TProcess;
 begin
+    Sincronizado := true;
+    Principal.BtnConsultarNuvemXLocal.Enabled:= false;
     Principal.MySQL.Open;
     Principal.SQLTransaction.StartTransaction;
     Principal.Memo.Append('Apagando dados anteriores.');
     Principal.MySQL.ExecuteDirect('DELETE FROM backup', Principal.SQLTransaction);
 
-    //Servidor
-    //S := TFPCustomHTTPClient.SimpleGet('http://homologador.compuniao.com.br/notaire/varredura_arquivos.php');
+    ////Servidor
+    ////S := TFPCustomHTTPClient.SimpleGet('http://homologador.compuniao.com.br/notaire/varredura_arquivos.php');
     S := Principal.SynServidor.Text;
     ArrTipo := S.Split('&');
     Principal.Memo.Append('Processando dados do servidor.');
@@ -77,18 +81,6 @@ begin
 
     Principal.SQLTransaction.Commit;                                            // Grava as inserções dos registros
 
-    //RunProgram := TProcess.Create(nil);
-    //RunProgram.Executable := 'bin/rar.exe';
-    //RunProgram.Parameters.Add('a');                                             // Compactar
-    ////RunProgram.Parameters.Add('-ep1');                                          // Sem manter estrutura de arquivos
-    //RunProgram.Parameters.Add('pendente.rar"');
-
-
-    Principal.Memo.Append('Procurando diferenças.');
-    Principal.SQLQuery.SQL.Text := 'SELECT bk1.pdf_nome, bk1.tipo FROM backup bk1 INNER JOIN backup bk2 ON bk1.pdf_nome = bk2.pdf_nome WHERE (bk1.data <> bk2.data OR bk1.tamanho <> bk2.tamanho) AND bk1.tipo = bk2.tipo AND bk1.origem <> bk2.origem group by bk1.pdf_nome order by bk1.pdf_nome';
-    //Principal.SQLQuery.SQL.Text := 'SELECT bk1.pdf_nome, bk1.tipo FROM backup bk1 where tamanho < 100000';
-    Principal.SQLQuery.Database := Principal.MySQL;
-    Principal.SQLQuery.Open;
     if not DirectoryExists('matriculas') then
     begin
         CreateDir('matriculas');
@@ -98,25 +90,71 @@ begin
     begin
         CreateDir('auxiliares');
     end;
+
+    Principal.Memo.Append('Procurando diferenças.');
+    Principal.SQLQuery.SQL.Text := 'SELECT bk1.pdf_nome, bk1.tipo FROM backup bk1 INNER JOIN backup bk2 ON bk1.pdf_nome = bk2.pdf_nome WHERE bk1.tamanho <> bk2.tamanho AND bk1.tipo = bk2.tipo AND bk1.origem <> bk2.origem GROUP BY bk1.pdf_nome ORDER BY bk1.pdf_nome';
+    //Principal.SQLQuery.SQL.Text := 'SELECT bk1.pdf_nome, bk1.tipo FROM backup bk1 where tamanho < 100000';
+    Principal.SQLQuery.Database := Principal.MySQL;
+    Principal.SQLQuery.Open;
+
     while not Principal.SQLQuery.Eof do
     begin
+        Sincronizado := false;
+
+        FileName := ExtractFileNameWithoutExt(Principal.SQLQuery.FieldByName('pdf_nome').AsString);
+        if (StrToInt(FileName) < 1000) then
+        begin
+            SubPasta := '1-999';
+        end
+        else
+        begin
+            SubPasta := Copy(FileName, 1, FileName.Length - 3) + '000-' + Copy(FileName, 1, FileName.Length - 3) + '999';
+        end;
+
         if (Principal.SQLQuery.FieldByName('tipo').AsInteger = 2) then
         begin
+            if not DirectoryExists('matriculas/' + SubPasta) then
+            begin
+                CreateDir('matriculas/' + SubPasta);
+            end;
+
             Arquivo := StringReplace(Principal.FormStorage.StoredValue['DiretorioPDFMatricula'], '\', '/', [rfReplaceAll]) + '/' + Principal.SQLQuery.FieldByName('pdf_nome').AsString;
             Principal.Memo.Append('Há diferenças na Matrícula ' + Principal.SQLQuery.FieldByName('pdf_nome').AsString);
-            CopyFile(Arquivo, 'matriculas/' + Principal.SQLQuery.FieldByName('pdf_nome').AsString);
+            CopyFile(Arquivo, 'matriculas/' + SubPasta + '/' + Principal.SQLQuery.FieldByName('pdf_nome').AsString);
         end;
 
         if (Principal.SQLQuery.FieldByName('tipo').AsInteger = 3) then
         begin
+            if not DirectoryExists('auxiliares/' + SubPasta) then
+            begin
+                CreateDir('auxiliares/' + SubPasta);
+            end;
+
             Arquivo := StringReplace(Principal.FormStorage.StoredValue['DiretorioPDFAuxiliar'], '\', '/', [rfReplaceAll]) + '/' + Principal.SQLQuery.FieldByName('pdf_nome').AsString;
             Principal.Memo.Append('Há diferenças no Auxiliar ' + Principal.SQLQuery.FieldByName('pdf_nome').AsString);
-            CopyFile(Arquivo, 'auxiliares/' + Principal.SQLQuery.FieldByName('pdf_nome').AsString);
+            CopyFile(Arquivo, 'auxiliares/' + SubPasta + '/' + Principal.SQLQuery.FieldByName('pdf_nome').AsString);
         end;
 
         Principal.SQLQuery.Next;
     end;
     Principal.SQLQuery.Close;
+
+    if not (Sincronizado) then
+    begin
+        Principal.Memo.Append('Compactando arquivos.');
+        RunProgram := TProcess.Create(nil);
+        RunProgram.Executable := 'bin/rar.exe';
+        RunProgram.Parameters.Add('a');                                       // Compactar
+        //RunProgram.Parameters.Add('-ep1');                                  // Sem manter estrutura de arquivos
+        RunProgram.Parameters.Add('pendente.rar');
+        RunProgram.Parameters.Add('matriculas');
+        RunProgram.Parameters.Add('auxiliares');
+        RunProgram.Options := RunProgram.Options + [poWaitOnExit];
+        RunProgram.ShowWindow := TShowWindowOptions.swoHIDE;                  // Para que não apareça a tela preta.
+        RunProgram.Execute;
+    end;
+
+    Principal.Memo.Append('Processo concluído.');
 
     //Principal.SQLQuery
 //SELECT bk1.pdf_nome, bk1.tipo FROM backup bk1
@@ -130,6 +168,7 @@ begin
 
     Principal.SQLTransaction.EndTransaction;
     Principal.MySQL.Close(false);
+    Principal.BtnConsultarNuvemXLocal.Enabled:= true;
 //ShowMessage(S);
 end;
 
