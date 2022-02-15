@@ -1,7 +1,7 @@
 object Principal: TPrincipal
-  Left = 406
+  Left = 235
   Height = 655
-  Top = 141
+  Top = 60
   Width = 848
   AllowDropFiles = True
   Caption = 'Notaire_image'
@@ -1357,7 +1357,7 @@ object Principal: TPrincipal
     Height = 598
     Top = 30
     Width = 840
-    ActivePage = TabSheet4
+    ActivePage = TabConferencia
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 4
     ImagesWidth = 16
@@ -2531,16 +2531,16 @@ object Principal: TPrincipal
         end
       end
     end
-    object TabSheet4: TTabSheet
+    object TabConferencia: TTabSheet
       Caption = 'Conferência do Backup'
       ClientHeight = 570
       ClientWidth = 832
       object PageControl3: TPageControl
-        AnchorSideLeft.Control = TabSheet4
-        AnchorSideTop.Control = TabSheet4
-        AnchorSideRight.Control = TabSheet4
+        AnchorSideLeft.Control = TabConferencia
+        AnchorSideTop.Control = TabConferencia
+        AnchorSideRight.Control = TabConferencia
         AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = TabSheet4
+        AnchorSideBottom.Control = TabConferencia
         AnchorSideBottom.Side = asrBottom
         Left = 8
         Height = 554
@@ -3365,7 +3365,7 @@ object Principal: TPrincipal
   object MySQL: TMySQL55Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'db_notaire_h'
+    DatabaseName = 'backup'
     KeepConnection = False
     Params.Strings = (
       'Port=3306'

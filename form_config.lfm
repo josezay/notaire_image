@@ -1,7 +1,7 @@
 object Config: TConfig
-  Left = 561
+  Left = 563
   Height = 576
-  Top = 158
+  Top = 152
   Width = 554
   AllowDropFiles = True
   AutoSize = True

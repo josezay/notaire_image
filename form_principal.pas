@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
-  Buttons, StdCtrls, IniPropStorage, Menus, FileUtil, SynEdit, form_config,
-  mysql55conn, SQLDB;
+  Buttons, StdCtrls, IniPropStorage, Menus, FileUtil, SynEdit, RTTICtrls,
+  form_config, mysql55conn, SQLDB;
 
 type
 
@@ -69,7 +69,7 @@ type
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
-    TabSheet4: TTabSheet;
+    TabConferencia: TTabSheet;
     TabSheet5: TTabSheet;
     procedure BtnAbrirImagemClick(Sender: TObject);
     procedure BtnExecutarAuxiliarClick(Sender: TObject);

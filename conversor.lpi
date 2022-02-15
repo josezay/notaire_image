@@ -113,25 +113,28 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="6">
+    <RequiredPackages Count="7">
       <Item1>
-        <PackageName Value="SynEdit"/>
+        <PackageName Value="RunTimeTypeInfoControls"/>
       </Item1>
       <Item2>
-        <PackageName Value="laz_synapse"/>
+        <PackageName Value="SynEdit"/>
       </Item2>
       <Item3>
-        <PackageName Value="dcpcrypt_laz"/>
+        <PackageName Value="laz_synapse"/>
       </Item3>
       <Item4>
-        <PackageName Value="dcpcrypt"/>
+        <PackageName Value="dcpcrypt_laz"/>
       </Item4>
       <Item5>
-        <PackageName Value="FCL"/>
+        <PackageName Value="dcpcrypt"/>
       </Item5>
       <Item6>
-        <PackageName Value="LCL"/>
+        <PackageName Value="FCL"/>
       </Item6>
+      <Item7>
+        <PackageName Value="LCL"/>
+      </Item7>
     </RequiredPackages>
     <Units Count="7">
       <Unit0>

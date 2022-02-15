@@ -249,41 +249,6 @@ begin
     end;
 end;
 
-// Ressincroniza arquivos pendentes
-//function TPrincipal.ressincronizaArquivos(): boolean;
-//var
-//    ArquivosPendentes: TStringList;
-//    I: integer;
-//begin
-//    ArquivosPendentes := TStringList.Create;
-//    try
-//        if (ConfigStorage.StoredValue['Ressincroniza'] = 'true') then
-//        begin
-//            FindAllFiles(ArquivosPendentes, 'matriculas_pendentes', '*.pdf', true);
-//            if (ArquivosPendentes.Count > 0) then
-//            begin
-//                ShowMessage(Format('Encontradas %d matricula(s) não sincronizada(s)', [ArquivosPendentes.Count]));
-//                for I := 0 to ArquivosPendentes.Count - 1 do
-//                begin
-//                     sincronizaArquivo(ArquivosPendentes[I], 2);
-//                end;
-//            end;
-//
-//            FindAllFiles(ArquivosPendentes, 'auxiliares_pendentes', '*.pdf', true);
-//            if (ArquivosPendentes.Count > 0) then
-//            begin
-//                ShowMessage(Format('Encontrados %d registros auxiliar(es) não sincronizado(s)', [ArquivosPendentes.Count]));
-//                for I := 0 to ArquivosPendentes.Count - 1 do
-//                begin
-//                     sincronizaArquivo(ArquivosPendentes[I], 3);
-//                end;
-//            end;
-//        end;
-//    finally
-//        ressincronizaArquivos := true;
-//    end;
-//end;
-
 // Gera TIF
 function geraTIF(Matricula: string): boolean;
 var

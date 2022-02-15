@@ -7,7 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, form_principal, form_config, Biblio, Matricula, Auxiliar, ConsultaNuvemLocal;
+  Forms, form_principal, form_config, Biblio, Matricula, Auxiliar,
+  ConsultaNuvemLocal, runtimetypeinfocontrols;
 
 {$R *.res}
 
