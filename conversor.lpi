@@ -136,7 +136,7 @@
         <PackageName Value="LCL"/>
       </Item7>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="8">
       <Unit0>
         <Filename Value="conversor.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -175,6 +175,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ConsultaNuvemLocal"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="consultalocal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ConsultaLocal"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

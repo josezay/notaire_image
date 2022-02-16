@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, form_principal, form_config, Biblio, Matricula, Auxiliar,
-  ConsultaNuvemLocal, runtimetypeinfocontrols;
+  ConsultaNuvemLocal, runtimetypeinfocontrols, ConsultaLocal;
 
 {$R *.res}
 

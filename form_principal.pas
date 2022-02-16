@@ -27,8 +27,12 @@ type
     ConfigStorage: TIniPropStorage;
     CampoNumeroAuxiliar: TEdit;
     DialogoImagens: TOpenDialog;
+    EditConferenciaUltAuxiliar: TEdit;
+    EditConferenciaUltMatricula: TEdit;
     FormStorage: TIniPropStorage;
     GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
     LabelNumeroAuxiliar: TLabel;
     LabelPDFMatricula: TLabel;
     LabelRARMatricula: TLabel;
@@ -37,10 +41,11 @@ type
     LabelNumeroMatricula: TLabel;
     ListaArquivos: TListBox;
     Memo: TMemo;
+    MemoLocal: TMemo;
     MySQL: TMySQL55Connection;
     PageControl1: TPageControl;
     PageControl2: TPageControl;
-    PageControl3: TPageControl;
+    Local: TPageControl;
     PainelImagens: TPanel;
     ProgressBarAuxiliar: TProgressBar;
     ProgressBarMatricula: TProgressBar;
@@ -62,14 +67,17 @@ type
     LabelPDFAuxiliar: TStaticText;
     DirectoryPDFAuxiliar: TSelectDirectoryDialog;
     BtnConsultarNuvemXLocal: TSpeedButton;
+    BtnConsultarLocal: TSpeedButton;
     SQLQuery: TSQLQuery;
     SQLTransaction: TSQLTransaction;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabConferencia: TTabSheet;
+    TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     procedure BtnAbrirImagemClick(Sender: TObject);
+    procedure BtnConsultarLocalClick(Sender: TObject);
     procedure BtnExecutarAuxiliarClick(Sender: TObject);
     procedure BtnExecutarMatriculaClick(Sender: TObject);
     procedure BtnPDFDirAuxiliarClick(Sender: TObject);
@@ -93,7 +101,7 @@ var
 
 implementation
 
-uses Matricula, Auxiliar, ConsultaNuvemLocal;
+uses Matricula, Auxiliar, ConsultaNuvemLocal, ConsultaLocal;
 
 {$R *.lfm}
 
@@ -169,6 +177,11 @@ begin
         ProgressBarMatricula.Visible := false;                                  // Ao escolher novas imagens esconde as barras de progresso.
         ProgressBarAuxiliar.Visible  := false;
     end;
+end;
+
+procedure TPrincipal.BtnConsultarLocalClick(Sender: TObject);
+begin
+  ConsultaLocal.Conferir();
 end;
 
 //********** Eventos Matricula **************************************************
