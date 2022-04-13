@@ -4,13 +4,13 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Release"/>
-    <Units Count="20">
+    <Units Count="21">
       <Unit0>
         <Filename Value="conversor.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <CursorPos X="68" Y="11"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,7 +21,7 @@
         <ResourceBaseClass Value="Form"/>
         <TopLine Value="179"/>
         <CursorPos X="50" Y="193"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -31,10 +31,10 @@
         <ComponentName Value="Config"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="62"/>
         <CursorPos X="9" Y="101"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit2>
@@ -42,10 +42,10 @@
         <Filename Value="matricula.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Matricula"/>
-        <EditorIndex Value="7"/>
-        <TopLine Value="112"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="55"/>
         <CursorPos X="5" Y="140"/>
-        <UsageCount Value="132"/>
+        <UsageCount Value="133"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -53,132 +53,136 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Biblio"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="8"/>
-        <TopLine Value="146"/>
-        <CursorPos X="50" Y="162"/>
-        <UsageCount Value="134"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="153"/>
+        <CursorPos X="29" Y="179"/>
+        <UsageCount Value="135"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="auxiliar.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Auxiliar"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="29" Y="8"/>
-        <UsageCount Value="130"/>
+        <UsageCount Value="131"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="consultanuvemlocal.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ConsultaNuvemLocal"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="131"/>
         <CursorPos X="81" Y="26"/>
-        <UsageCount Value="128"/>
+        <UsageCount Value="129"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="consultalocal.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ConsultaLocal"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="21"/>
         <CursorPos Y="21"/>
-        <UsageCount Value="88"/>
+        <UsageCount Value="89"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="imagens\livro.pas"/>
+        <Filename Value="livro.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Livro"/>
-        <EditorIndex Value="1"/>
+        <UsageCount Value="21"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="imagens\livro.pas"/>
+        <UnitName Value="Livro"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="100"/>
         <CursorPos X="17" Y="46"/>
         <UsageCount Value="51"/>
-        <Loaded Value="True"/>
-      </Unit8>
-      <Unit9>
+      </Unit9>
+      <Unit10>
         <Filename Value="C:\lazarus\lcl\dialogs.pp"/>
         <UnitName Value="Dialogs"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="218"/>
         <CursorPos X="3" Y="261"/>
         <UsageCount Value="1"/>
-      </Unit9>
-      <Unit10>
+      </Unit10>
+      <Unit11>
         <Filename Value="C:\lazarus\lcl\forms.pp"/>
         <UnitName Value="Forms"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="1"/>
-      </Unit10>
-      <Unit11>
+      </Unit11>
+      <Unit12>
         <Filename Value="C:\lazarus\lcl\stdctrls.pp"/>
         <UnitName Value="StdCtrls"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1309"/>
         <CursorPos X="3" Y="1328"/>
         <UsageCount Value="1"/>
-      </Unit11>
-      <Unit12>
+      </Unit12>
+      <Unit13>
         <Filename Value="C:\lazarus\lcl\comctrls.pp"/>
         <UnitName Value="ComCtrls"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="101"/>
         <CursorPos X="3" Y="120"/>
         <UsageCount Value="1"/>
-      </Unit12>
-      <Unit13>
+      </Unit13>
+      <Unit14>
         <Filename Value="C:\lazarus\lcl\extctrls.pp"/>
         <UnitName Value="ExtCtrls"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1074"/>
         <CursorPos X="3" Y="1093"/>
         <UsageCount Value="1"/>
-      </Unit13>
-      <Unit14>
+      </Unit14>
+      <Unit15>
         <Filename Value="C:\lazarus\lcl\buttons.pp"/>
         <UnitName Value="Buttons"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="394"/>
         <CursorPos X="3" Y="413"/>
         <UsageCount Value="1"/>
-      </Unit14>
-      <Unit15>
+      </Unit15>
+      <Unit16>
         <Filename Value="C:\lazarus\fpc\3.2.0\source\packages\fcl-db\src\sqldb\sqldb.pp"/>
         <UnitName Value="SQLDB"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="236"/>
         <CursorPos X="15" Y="560"/>
         <UsageCount Value="3"/>
-      </Unit15>
-      <Unit16>
+      </Unit16>
+      <Unit17>
         <Filename Value="C:\lazarus\lcl\include\custommemo.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="21"/>
         <CursorPos X="23" Y="40"/>
         <UsageCount Value="4"/>
-      </Unit16>
-      <Unit17>
+      </Unit17>
+      <Unit18>
         <Filename Value="backup\form_principal.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="182"/>
         <UsageCount Value="5"/>
-      </Unit17>
-      <Unit18>
+      </Unit18>
+      <Unit19>
         <Filename Value="..\notaire_sentinela\biblio.pas"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="5"/>
-      </Unit18>
-      <Unit19>
+      </Unit19>
+      <Unit20>
         <Filename Value="..\notaire_sentinela\sentinela.lpr"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="97"/>
         <CursorPos X="13" Y="111"/>
         <UsageCount Value="6"/>
-      </Unit19>
+      </Unit20>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="form_principal.pas"/>
         <Caret Line="244" Column="65" TopLine="200"/>
@@ -272,33 +276,29 @@
         <Caret Line="269" Column="18" TopLine="255"/>
       </Position23>
       <Position24>
-        <Filename Value="form_principal.pas"/>
-        <Caret Line="130" Column="85" TopLine="234"/>
+        <Filename Value="biblio.pas"/>
+        <Caret Line="400" Column="25" TopLine="378"/>
       </Position24>
       <Position25>
         <Filename Value="biblio.pas"/>
-        <Caret Line="400" Column="25" TopLine="378"/>
+        <Caret Line="159" Column="37" TopLine="147"/>
       </Position25>
       <Position26>
         <Filename Value="biblio.pas"/>
-        <Caret Line="159" Column="37" TopLine="147"/>
+        <Caret Line="156" Column="14" TopLine="140"/>
       </Position26>
       <Position27>
         <Filename Value="biblio.pas"/>
-        <Caret Line="156" Column="14" TopLine="140"/>
+        <Caret Line="159" Column="201" TopLine="153"/>
       </Position27>
       <Position28>
-        <Filename Value="biblio.pas"/>
-        <Caret Line="159" Column="201" TopLine="153"/>
-      </Position28>
-      <Position29>
         <Filename Value="form_principal.pas"/>
         <Caret Line="193" Column="50" TopLine="179"/>
-      </Position29>
-      <Position30>
+      </Position28>
+      <Position29>
         <Filename Value="biblio.pas"/>
         <Caret Line="417" Column="8" TopLine="397"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

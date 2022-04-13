@@ -189,7 +189,7 @@
         <UnitName Value="ConsultaLocal"/>
       </Unit7>
       <Unit8>
-        <Filename Value="imagens\livro.pas"/>
+        <Filename Value="livro.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Livro"/>
       </Unit8>
