@@ -289,6 +289,7 @@ begin
         end
         else
         begin
+            Principal.MemoBackupManual.Append(S);
             if (Tipo = 0) then
             begin
                 CreateDir(Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '/livros/');
@@ -316,37 +317,39 @@ end;
 // Ressincroniza arquivos pendentes
 function ressincronizaArquivos(): boolean;
 var
-    ArquivosPendentes: TStringList;
+    MatriculasPendentes: TStringList;
+    AuxiliaresPendentes: TStringList;
     I: integer;
 begin
-    ArquivosPendentes := TStringList.Create;
+    MatriculasPendentes := TStringList.Create;
+    AuxiliaresPendentes := TStringList.Create;
     try
         //if (ConfigStorage.StoredValue['Ressincroniza'] = 'true') then
         //begin
-            FindAllFiles(ArquivosPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '/matriculas/', '*.pdf', true);
-            if (ArquivosPendentes.Count > 0) then
+            FindAllFiles(MatriculasPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '/matriculas/', '*.pdf', true);
+            if (MatriculasPendentes.Count > 0) then
             begin
                 //ShowMessage('teste');
-                Principal.MemoBackupManual.Append(Format('Encontradas %d matricula(s) não sincronizada(s)', [ArquivosPendentes.Count]));
-                for I := 0 to ArquivosPendentes.Count - 1 do
+                Principal.MemoBackupManual.Append(Format('Encontradas %d matricula(s) não sincronizada(s)', [MatriculasPendentes.Count]));
+                for I := 0 to MatriculasPendentes.Count - 1 do
                 begin
-                    Principal.MemoBackupManual.Append('Tentando matrícula ' + LazFileUtils.ExtractFileNameOnly(ArquivosPendentes[I]));
-                    if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(ArquivosPendentes[I]), 2, true)) then
+                    Principal.MemoBackupManual.Append('Tentando matrícula ' + LazFileUtils.ExtractFileNameOnly(MatriculasPendentes[I]));
+                    if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(MatriculasPendentes[I]), 2, true)) then
                     begin
                         Principal.MemoBackupManual.Append('Sem sucesso');
                     end;
                 end;
             end;
 
-            FindAllFiles(ArquivosPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '/auxiliares/', '*.pdf', true);
-            if (ArquivosPendentes.Count > 0) then
+            FindAllFiles(AuxiliaresPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '/auxiliares/', '*.pdf', true);
+            if (AuxiliaresPendentes.Count > 0) then
             begin
                 //ShowMessage('teste');
-                Principal.MemoBackupManual.Append(Format('Encontradas %d auxiliares(s) não sincronizada(s)', [ArquivosPendentes.Count]));
-                for I := 0 to ArquivosPendentes.Count - 1 do
+                Principal.MemoBackupManual.Append(Format('Encontradas %d auxiliares(s) não sincronizada(s)', [AuxiliaresPendentes.Count]));
+                for I := 0 to AuxiliaresPendentes.Count - 1 do
                 begin
-                    Principal.MemoBackupManual.Append('Tentando auxiliares ' + LazFileUtils.ExtractFileNameOnly(ArquivosPendentes[I]));
-                    if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(ArquivosPendentes[I]), 3, true)) then
+                    Principal.MemoBackupManual.Append('Tentando auxiliares ' + LazFileUtils.ExtractFileNameOnly(AuxiliaresPendentes[I]));
+                    if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(AuxiliaresPendentes[I]), 3, true)) then
                     begin
                         Principal.MemoBackupManual.Append('Sem sucesso');
                     end;

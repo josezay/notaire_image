@@ -31,7 +31,7 @@ begin
     Principal.MySQL.ExecuteDirect('DELETE FROM backup', Principal.SQLTransaction);  // Limpa os registros velhos do banco de dados.
 
     ////Servidor
-    S := TFPCustomHTTPClient.SimpleGet('http://homologador.compuniao.com.br/notaire/varredura_arquivos.php');   // Busca a lista de arquivos do servidor da compunião.
+    S := TFPCustomHTTPClient.SimpleGet('http://www.compuniao.com.br/seleme/varredura_arquivos.php');   // Busca a lista de arquivos do servidor da compunião.
     //S := Principal.SynServidor.Text;
     ArrTipo := S.Split('&');                                                    // Separa a lista em uma array com os valores das matrículas em 0 e dos auxiliares em 1.
     Principal.Memo.Append('Processando dados do servidor.');
