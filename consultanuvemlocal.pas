@@ -39,7 +39,7 @@ begin
     for I := Low(ArrArquivos) to High(ArrArquivos) do                           // Do menor para o maior faça.
     begin
         ArrRegistro := ArrArquivos[I].Split('#');                               // Separa o bloco de dados referente ao arquivo em nome, data e tamanho.
-        if (Length(ArrRegistro) = 3) then                                       // Se o array tem dados, não é o último.
+        if (Length(ArrRegistro) > 1) then                                       // Se o array tem dados, não é o último.
         begin
             Principal.MySQL.ExecuteDirect('insert into backup (pdf_nome, data, tamanho, origem, tipo) values (''' + ArrRegistro[0] + ''',''' + ArrRegistro[1] + ''',''' + ArrRegistro[2] + ''',''2'', ''2'')', Principal.SQLTransaction);   // Insere na base de dados um (registro de) arquivo de origem compunião e tipo matrícula.
         end;
@@ -49,7 +49,7 @@ begin
     for I := Low(ArrArquivos) to High(ArrArquivos) do
     begin
         ArrRegistro := ArrArquivos[I].Split('#');                               // Separa cada registro em nome, data e tipo.
-        if (Length(ArrRegistro) = 3) then
+        if (Length(ArrRegistro) > 1) then
         begin
             Principal.MySQL.ExecuteDirect('insert into backup (pdf_nome, data, tamanho, origem, tipo) values (''' + ArrRegistro[0] + ''',''' + ArrRegistro[1] + ''',''' + ArrRegistro[2] + ''',''2'', ''3'')', Principal.SQLTransaction);   // Insere na base de dados um (registro de) arquivo de origem compunião e tipo auxiliar.
         end;
@@ -64,7 +64,7 @@ begin
     for I := Low(ArrArquivos) to High(ArrArquivos) do                           // Do menor para o maior faça.
     begin
         ArrRegistro := ArrArquivos[I].Split('#');                               // Separa o registro de arquivo em nome, tamanho e tipo.
-        if (Length(ArrRegistro) = 3) then
+        if (Length(ArrRegistro) > 1) then
         begin
             Principal.MySQL.ExecuteDirect('insert into backup (pdf_nome, data, tamanho, origem, tipo) values (''' + ArrRegistro[0] + ''',''' + ArrRegistro[1] + ''',''' + ArrRegistro[2] + ''',''1'', ''2'')', Principal.SQLTransaction);   // Insere na base de dados um (registro de) arquivo de origem cartório e tipo matrícula.
         end;
@@ -75,7 +75,7 @@ begin
     for I := Low(ArrArquivos) to High(ArrArquivos) do
     begin
         ArrRegistro := ArrArquivos[I].Split('#');
-        if (Length(ArrRegistro) = 3) then
+        if (Length(ArrRegistro) > 1) then
         begin
             Principal.MySQL.ExecuteDirect('insert into backup (pdf_nome, data, tamanho, origem, tipo) values (''' + ArrRegistro[0] + ''',''' + ArrRegistro[1] + ''',''' + ArrRegistro[2] + ''',''1'', ''3'')', Principal.SQLTransaction);   // Insere na base de dados um (registro de) arquivo de origem cartório e tipo auxiliar.
         end;
@@ -94,7 +94,7 @@ begin
     end;
 
     Principal.Memo.Append('Procurando diferenças.');
-    Principal.SQLQuery.SQL.Text := 'SELECT bk1.pdf_nome, bk1.tipo FROM backup bk1 INNER JOIN backup bk2 ON bk1.pdf_nome = bk2.pdf_nome WHERE bk1.tamanho <> bk2.tamanho AND bk1.tipo = bk2.tipo AND bk1.origem <> bk2.origem GROUP BY bk1.pdf_nome ORDER BY bk1.pdf_nome';  // Consulta o arquivo de mesmo tipo e de origem, e tamanho diferente.
+    Principal.SQLQuery.SQL.Text := 'SELECT bk1.pdf_nome, bk1.tipo, bk1.origem FROM backup bk1 INNER JOIN backup bk2 ON bk1.pdf_nome = bk2.pdf_nome WHERE bk1.tamanho <> bk2.tamanho AND bk1.tipo = bk2.tipo AND bk1.origem <> bk2.origem GROUP BY bk1.pdf_nome UNION SELECT bkp.pdf_nome, bkp.tipo, bkp.origem FROM backup bkp WHERE bkp.tipo IN (2, 3) GROUP BY bkp.pdf_nome HAVING (COUNT(bkp.pdf_nome) = 1 AND bkp.origem = 1)';  // Consulta o arquivo de mesmo tipo e de origem, e tamanho diferente UNION Consulta matrículas que só estão na origem 1
     Principal.SQLQuery.Database := Principal.MySQL;                             // Abre a conexão.
     Principal.SQLQuery.Open;
 

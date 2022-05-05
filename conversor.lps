@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="23"/>
-        <UsageCount Value="145"/>
+        <UsageCount Value="151"/>
       </Unit0>
       <Unit1>
         <Filename Value="form_principal.pas"/>
@@ -18,9 +18,9 @@
         <ComponentName Value="Principal"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="214"/>
+        <TopLine Value="193"/>
         <CursorPos X="47" Y="129"/>
-        <UsageCount Value="145"/>
+        <UsageCount Value="151"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -31,9 +31,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="83"/>
+        <TopLine Value="69"/>
         <CursorPos X="9" Y="101"/>
-        <UsageCount Value="145"/>
+        <UsageCount Value="151"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit2>
@@ -42,20 +42,18 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Matricula"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="97"/>
+        <TopLine Value="77"/>
         <CursorPos Y="89"/>
-        <UsageCount Value="140"/>
+        <UsageCount Value="146"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="biblio.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Biblio"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="100"/>
-        <CursorPos X="7" Y="140"/>
-        <UsageCount Value="142"/>
+        <CursorPos X="27" Y="91"/>
+        <UsageCount Value="148"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -63,18 +61,20 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Auxiliar"/>
         <EditorIndex Value="4"/>
-        <CursorPos X="29" Y="8"/>
-        <UsageCount Value="138"/>
+        <TopLine Value="69"/>
+        <CursorPos X="32" Y="27"/>
+        <UsageCount Value="144"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="consultanuvemlocal.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ConsultaNuvemLocal"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="40"/>
-        <CursorPos X="75" Y="34"/>
-        <UsageCount Value="136"/>
+        <TopLine Value="43"/>
+        <CursorPos X="98" Y="34"/>
+        <UsageCount Value="142"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -82,16 +82,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ConsultaLocal"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="21"/>
+        <TopLine Value="29"/>
         <CursorPos Y="21"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="102"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="livro.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Livro"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="34"/>
       </Unit8>
       <Unit9>
         <Filename Value="imagens\livro.pas"/>
