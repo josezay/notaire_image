@@ -35,7 +35,7 @@ begin
     //S := Principal.SynServidor.Text;
     ArrTipo := S.Split('&');                                                    // Separa a lista em uma array com os valores das matrículas em 0 e dos auxiliares em 1.
     Principal.Memo.Append('Processando dados do servidor.');
-    ArrArquivos := ArrTipo[0].Split('|');                                       // Cria uma array com os arquivos das matrículas do servidor.
+    ArrArquivos := ArrTipo[1].Split('|');                                       // Cria uma array com os arquivos das matrículas do servidor.
     for I := Low(ArrArquivos) to High(ArrArquivos) do                           // Do menor para o maior faça.
     begin
         ArrRegistro := ArrArquivos[I].Split('#');                               // Separa o bloco de dados referente ao arquivo em nome, data e tamanho.
@@ -45,7 +45,7 @@ begin
         end;
     end;
 
-    ArrArquivos := ArrTipo[1].Split('|');                                       // Separa os arquivos auxiliares numa array.
+    ArrArquivos := ArrTipo[2].Split('|');                                       // Separa os arquivos auxiliares numa array.
     for I := Low(ArrArquivos) to High(ArrArquivos) do
     begin
         ArrRegistro := ArrArquivos[I].Split('#');                               // Separa cada registro em nome, data e tipo.
@@ -60,7 +60,7 @@ begin
     ArrTipo := S.Split('&');                                                    // Separa a lista entre matrícula e auxiliares através do caractere &.
     Principal.Memo.Append('Processando dados do cartório.');
     // Matriculas do cartorio.
-    ArrArquivos := ArrTipo[0].Split('|');                                       // Separa a lista de matrículas em uma array de matrículas.
+    ArrArquivos := ArrTipo[1].Split('|');                                       // Separa a lista de matrículas em uma array de matrículas.
     for I := Low(ArrArquivos) to High(ArrArquivos) do                           // Do menor para o maior faça.
     begin
         ArrRegistro := ArrArquivos[I].Split('#');                               // Separa o registro de arquivo em nome, tamanho e tipo.
@@ -71,7 +71,7 @@ begin
     end;
 
     // Auxiliares do cartorio.
-    ArrArquivos := ArrTipo[1].Split('|');
+    ArrArquivos := ArrTipo[2].Split('|');
     for I := Low(ArrArquivos) to High(ArrArquivos) do
     begin
         ArrRegistro := ArrArquivos[I].Split('#');
