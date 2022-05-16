@@ -46,12 +46,19 @@ begin
     Livro := '';
     if (Principal.ComboTipoLivro.Text = 'Abertura') then
     begin
-        Livro := 'abertura';
+        Livro := '000 Abertura';
     end;
 
     if (Principal.ComboTipoLivro.Text = 'Fechamento') then
     begin
-        Livro := 'fechamento';
+        Livro := Principal.EditLivroFolha.Text;
+        S := '';
+        for I := Livro.Length to 2 do
+        begin
+            S := S + '0';                                                       // completa com 3 zeros
+        end;
+
+        Livro := S + Livro + ' Fechamento';
     end;
 
     if (Principal.ComboTipoLivro.Text = 'Folha') then
@@ -68,7 +75,7 @@ begin
 
         if not (Principal.ComboLivroAnexo.Text = '') then                       // Se for anexo
         begin
-            Livro := Livro + '-' + Principal.ComboLivroAnexo.Text;
+            Livro := Livro + '-Anexo - ' + Principal.ComboLivroAnexo.Text;
         end;
     end;
 
@@ -115,15 +122,23 @@ end;
 
 procedure TipoOnChange();
 begin
-    if (Principal.ComboTipoLivro.Text = 'Folha') then
-    begin
-        Principal.EditLivroFolha.Enabled := true;
-        Principal.ComboLivroAnexo.Enabled:= true;
-    end
-    else
+    if (Principal.ComboTipoLivro.Text = 'Abertura') then
     begin
         Principal.EditLivroFolha.Enabled := false;
         Principal.ComboLivroAnexo.Enabled:= false;
+    end
+    else
+    begin
+        if (Principal.ComboTipoLivro.Text = 'Fechamento') then
+        begin
+            Principal.EditLivroFolha.Enabled := true;
+            Principal.ComboLivroAnexo.Enabled:= false;
+        end
+        else                                                                    // Folha
+        begin
+            Principal.EditLivroFolha.Enabled := true;
+            Principal.ComboLivroAnexo.Enabled:= true;
+        end;
     end;
 end;
 

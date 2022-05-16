@@ -1,7 +1,7 @@
 object Principal: TPrincipal
-  Left = -7
+  Left = 90
   Height = 619
-  Top = 87
+  Top = 83
   Width = 766
   AllowDropFiles = True
   Caption = 'Notaire_image 1.3.1'
@@ -1425,6 +1425,7 @@ object Principal: TPrincipal
           BorderSpacing.Right = 8
           BorderSpacing.Bottom = 8
           ItemHeight = 0
+          OnClick = ListaArquivosClick
           TabOrder = 0
         end
         object BtnAbrirImagem: TSpeedButton
@@ -1629,10 +1630,10 @@ object Principal: TPrincipal
         Height = 518
         Top = 8
         Width = 310
-        ActivePage = TabSheet7
+        ActivePage = TabSheet2
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Around = 8
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 1
         object TabSheet2: TTabSheet
           AnchorSideLeft.Control = PageControl2

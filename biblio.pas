@@ -47,6 +47,35 @@ begin
         end;
     end;
 
+    if (Tipo = 0) then
+    begin
+        if (Principal.ComboLivro.Text = '') then
+        begin
+            MessageDlg('Preencha o número do Livro!', mtError, [mbOK], 0);
+            Principal.ComboLivro.SetFocus;
+            valida := false;
+            Exit;
+        end;
+
+        if ((Principal.ComboTipoLivro.Text = 'Folha') OR (Principal.ComboTipoLivro.Text = 'Fechamento')) then
+        begin
+            if (Principal.EditLivroFolha.Text = '') then
+            begin
+                MessageDlg('Preencha o número da Folha!', mtError, [mbOK], 0);
+                Principal.EditLivroFolha.SetFocus;
+                valida := false;
+                Exit;
+            end;
+        end;
+
+        if (Principal.FormStorage.StoredValue['DiretorioPDFLivro'] = '') then
+        begin
+            MessageDlg('É necessário escolher o diretório de destino para arquivos PDF!', mtError, [mbOK], 0);
+            valida := false;
+            Exit;
+        end;
+    end;
+
     // Validações específicas
     if (Tipo = 2) then
     begin
@@ -78,25 +107,23 @@ begin
             valida := false;
             Exit;
         end;
-    end
-    else
-    begin
-        if (Tipo = 3) then
-        begin
-            if (Principal.CampoNumeroAuxiliar.Text = '') then
-            begin
-                MessageDlg('Preencha o número do Registro Auxiliar!', mtError, [mbOK], 0);
-                Principal.CampoNumeroAuxiliar.SetFocus;
-                valida := false;
-                Exit;
-            end;
+    end;
 
-            if (Principal.FormStorage.StoredValue['DiretorioPDFAuxiliar'] = '') then
-            begin
-                MessageDlg('É necessário escolher o diretório de destino para arquivos PDF!', mtError, [mbOK], 0);
-                valida := false;
-                Exit;
-            end;
+    if (Tipo = 3) then
+    begin
+        if (Principal.CampoNumeroAuxiliar.Text = '') then
+        begin
+            MessageDlg('Preencha o número do Registro Auxiliar!', mtError, [mbOK], 0);
+            Principal.CampoNumeroAuxiliar.SetFocus;
+            valida := false;
+            Exit;
+        end;
+
+        if (Principal.FormStorage.StoredValue['DiretorioPDFAuxiliar'] = '') then
+        begin
+            MessageDlg('É necessário escolher o diretório de destino para arquivos PDF!', mtError, [mbOK], 0);
+            valida := false;
+            Exit;
         end;
     end;
 end;
