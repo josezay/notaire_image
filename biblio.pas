@@ -355,10 +355,10 @@ begin
 
     // Chama programa que reseta a data de modificação do arquivo para atualizar data do tif.
     RunProgram := TProcess.Create(nil);
-    RunProgram.Executable := 'bin\atualiza_data_arquivo.exe';
+    RunProgram.Executable := 'bin\atualiza_data.exe';
     RunProgram.Parameters.Add('"' + Principal.FormStorage.StoredValue['DiretorioTIFMatricula'] + '\' + SubdiretorioTIF + '\' + NomeTIF + '.tif');
-    //RunProgram.Options := RunProgram.Options + [poWaitOnExit];
-    RunProgram.ShowWindow := TShowWindowOptions.swoHIDE;                        // Para que não apareça a tela preta.
+    RunProgram.Options := RunProgram.Options + [poWaitOnExit];
+    //RunProgram.ShowWindow := TShowWindowOptions.swoHIDE;                        // Para que não apareça a tela preta.
     RunProgram.Execute;
     RunProgram.Free;
 end;

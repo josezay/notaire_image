@@ -1,7 +1,7 @@
 object Principal: TPrincipal
-  Left = 191
+  Left = 175
   Height = 619
-  Top = 328
+  Top = 143
   Width = 766
   AllowDropFiles = True
   Caption = 'Notaire_image 1.3.1'
