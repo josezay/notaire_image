@@ -5,7 +5,7 @@ unit Biblio;
 interface
 
 uses
-  Classes, SysUtils, DCPsha256, Dialogs, process, fphttpclient, LazFileUtils, FileUtil;
+  Classes, SysUtils, DCPsha256, Dialogs, process, fphttpclient, LazFileUtils, FileUtil, StrUtils;
 
   function sha256(S: String): String;
   function valida(Tipo: integer): boolean;
@@ -356,7 +356,7 @@ begin
     // Chama programa que reseta a data de modificação do arquivo para atualizar data do tif.
     RunProgram := TProcess.Create(nil);
     RunProgram.Executable := 'bin\atualiza_data.exe';
-    RunProgram.Parameters.Add('"' + Principal.FormStorage.StoredValue['DiretorioTIFMatricula'] + '\' + SubdiretorioTIF + '\' + NomeTIF + '.tif');
+    RunProgram.Parameters.Add(ReplaceStr('"' + Principal.FormStorage.StoredValue['DiretorioTIFMatricula'] + '\' + SubdiretorioTIF + '\' + NomeTIF + '.tif', '\', '/'));
     RunProgram.Options := RunProgram.Options + [poWaitOnExit];
     //RunProgram.ShowWindow := TShowWindowOptions.swoHIDE;                        // Para que não apareça a tela preta.
     RunProgram.Execute;
