@@ -55,7 +55,7 @@ begin
         S := '';
         for I := Livro.Length to 2 do
         begin
-            S := S + '0';                                                       // completa com 3 zeros
+            S := S + '0';                                                       // Completa com 3 zeros.
         end;
 
         Livro := S + Livro + ' Fechamento';
@@ -68,12 +68,12 @@ begin
         S := '';
         for I := Livro.Length to 2 do
         begin
-            S := S + '0';                                                       // completa com 3 zeros
+            S := S + '0';                                                       // Completa com 3 zeros.
         end;
 
         Livro := S + Livro;
 
-        if not (Principal.ComboLivroAnexo.Text = '') then                       // Se for anexo
+        if not (Principal.ComboLivroAnexo.Text = '') then                       // Se for anexo.
         begin
             Livro := Livro + '-Anexo - ' + Principal.ComboLivroAnexo.Text;
         end;
@@ -134,7 +134,7 @@ begin
             Principal.EditLivroFolha.Enabled := true;
             Principal.ComboLivroAnexo.Enabled:= false;
         end
-        else                                                                    // Folha
+        else                                                                    // Folha.
         begin
             Principal.EditLivroFolha.Enabled := true;
             Principal.ComboLivroAnexo.Enabled:= true;

@@ -34,7 +34,7 @@ begin
         end
         else
         begin
-            Contador:=0;                                                        // Se existe zera o contador e adiciona arquivos acumulados na lista (Já que não é fim dos arquivos, onde os além do último não devem ser adicionados na lista).
+            Contador := 0;                                                      // Se existe zera o contador e adiciona arquivos acumulados na lista (Já que não é fim dos arquivos, onde os além do último não devem ser adicionados na lista).
             if (S <> '') then
             begin
                 Principal.MemoLocal.Append(S);

@@ -152,7 +152,7 @@ uses Matricula, Auxiliar, Livro, ConsultaNuvemLocal, ConsultaLocal, Biblio;
 // Ao iniciar
 procedure TPrincipal.FormCreate(Sender: TObject);
 begin
-    // Carrega as configurações para o programa
+    // Carrega as configurações para o programa.
     FormStorage.IniFileName   := 'config.ini';
     ConfigStorage.IniFileName := 'config.ini';
     FormStorage.Restore;
@@ -192,7 +192,7 @@ begin
         SetLength(Imagens, DialogoImagens.Files.Count);                         // Define a array de imagens com tamanho que comporte a quantidade de arquivos escolhidos.
         for I := 0 to DialogoImagens.Files.Count - 1 do                         // Para cada arquivo escolhido.
         begin
-            Imagens[I] := DialogoImagens.Files[I];                              // Insere o nome e diretório do arquivo no array de imagens
+            Imagens[I] := DialogoImagens.Files[I];                              // Insere o nome e diretório do arquivo no array de imagens.
             ListaArquivos.items.add(ExtractFileName(DialogoImagens.Files[I]));  // Mostra em tela o nome simples.
         end;
 

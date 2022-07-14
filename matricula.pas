@@ -75,8 +75,8 @@ var
     Erro: boolean;
 begin
     Matricula := Principal.CampoNumeroMatricula.Text;
-    Principal.BtnExecutarMatricula.Enabled  := false;                                     // Desabilita o botão.
-    Principal.ProgressBarMatricula.Visible  := true;                                      // Deixa visível a barra de progresso.
+    Principal.BtnExecutarMatricula.Enabled  := false;                           // Desabilita o botão.
+    Principal.ProgressBarMatricula.Visible  := true;                            // Deixa visível a barra de progresso.
     Principal.ProgressBarMatricula.Position := 0;
     Principal.Update;                                                           // Atualiza o formulário para que o botão executar apareça desabilitado antes que as atividades de conversão iniciem.
     Erro := false;

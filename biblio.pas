@@ -129,7 +129,6 @@ begin
 end;
 
 // Compacta arquivos
-// Somente tipo 2 gera RAR
 function geraRAR(Numero: string; Tipo: integer): boolean;
 var
     RunProgram: TProcess;
@@ -178,17 +177,14 @@ function geraPDF(Nome: string; Tipo: integer): boolean;
 var
     RunProgram: TProcess;
     I: integer;
-    Comando: string;
 begin
     // Gera PDF normal temporário
     RunProgram := TProcess.Create(nil);
     RunProgram.Executable := 'magick';
-    Comando := 'magick ';
 
     for I := Low(Imagens) to High(Imagens) do
     begin
         RunProgram.Parameters.Add(Imagens[I]);
-        Comando := Comando + Imagens[I] + ' ';
     end;
 
     if (Tipo = 2) then
@@ -202,7 +198,6 @@ begin
     end;
 
     RunProgram.Parameters.Add(Nome + '.pdf');
-    Comando := Comando + Nome + '.pdf';
     RunProgram.Options := RunProgram.Options + [poWaitOnExit];
     RunProgram.ShowWindow := TShowWindowOptions.swoHIDE;                        // Para que não apareça a tela preta.
     RunProgram.Execute;
@@ -333,7 +328,6 @@ begin
       RunProgram.Parameters.Add('-crop');
       RunProgram.Parameters.Add(Principal.EditTamanhoXMatricula.Text + 'X' + Principal.EditTamanhoYMatricula.Text + '+' + Principal.EditDeslocamentoXMatricula.Text + '+' + Principal.EditDeslocamentoYMatricula.Text);
       RunProgram.Parameters.Add('+repage');
-
     end;
 
     if (Principal.ConfigStorage.StoredValue['ComprimirTIF'] = 'true') then      // Comprime o tif (preto e branco) se marcado para tal na configuração.
@@ -411,9 +405,7 @@ begin
             sincronizaArquivo := true;                                          // Sincroniza o arquivo PDF-A original.
             if (Excluir) then
             begin
-
                 //Ressincronizar livro.
-
                 if (Tipo = 2) then
                 begin
                     DeleteFile(Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '\matriculas\' + Numero + '.pdf');
@@ -462,39 +454,35 @@ begin
     MatriculasPendentes := TStringList.Create;
     AuxiliaresPendentes := TStringList.Create;
     try
-        //if (ConfigStorage.StoredValue['Ressincroniza'] = 'true') then
-        //begin
-            FindAllFiles(MatriculasPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '\matriculas\', '*.pdf', true);
-            if (MatriculasPendentes.Count > 0) then
+        FindAllFiles(MatriculasPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '\matriculas\', '*.pdf', true);
+        if (MatriculasPendentes.Count > 0) then
+        begin
+            //ShowMessage('teste');
+            Principal.MemoBackupManual.Append(Format('Encontradas %d matricula(s) não sincronizada(s)', [MatriculasPendentes.Count]));
+            for I := 0 to MatriculasPendentes.Count - 1 do
             begin
-                //ShowMessage('teste');
-                Principal.MemoBackupManual.Append(Format('Encontradas %d matricula(s) não sincronizada(s)', [MatriculasPendentes.Count]));
-                for I := 0 to MatriculasPendentes.Count - 1 do
+                Principal.MemoBackupManual.Append('Tentando matrícula ' + LazFileUtils.ExtractFileNameOnly(MatriculasPendentes[I]));
+                if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(MatriculasPendentes[I]), 2, true)) then
                 begin
-                    Principal.MemoBackupManual.Append('Tentando matrícula ' + LazFileUtils.ExtractFileNameOnly(MatriculasPendentes[I]));
-                    if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(MatriculasPendentes[I]), 2, true)) then
-                    begin
-                        Principal.MemoBackupManual.Append('Sem sucesso');
-                    end;
+                    Principal.MemoBackupManual.Append('Sem sucesso');
                 end;
             end;
+        end;
 
-            //FindAllFiles(AuxiliaresPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '/auxiliares/', '*.pdf', true);
-            //if (AuxiliaresPendentes.Count > 0) then
-            //begin
-            //    //ShowMessage('teste');
-            //    Principal.MemoBackupManual.Append(Format('Encontradas %d auxiliares(s) não sincronizada(s)', [AuxiliaresPendentes.Count]));
-            //    for I := 0 to AuxiliaresPendentes.Count - 1 do
-            //    begin
-            //        Principal.MemoBackupManual.Append('Tentando auxiliares ' + LazFileUtils.ExtractFileNameOnly(AuxiliaresPendentes[I]));
-            //        if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(AuxiliaresPendentes[I]), 3, true)) then
-            //        begin
-            //            Principal.MemoBackupManual.Append('Sem sucesso');
-            //        end;
-            //    end;
-            //end;
-
-        //end;
+        FindAllFiles(AuxiliaresPendentes, Principal.ConfigStorage.StoredValue['DiretorioPendencias'] + '\auxiliares\', '*.pdf', true);
+        if (AuxiliaresPendentes.Count > 0) then
+        begin
+            //ShowMessage('teste');
+            Principal.MemoBackupManual.Append(Format('Encontradas %d auxiliares(s) não sincronizada(s)', [AuxiliaresPendentes.Count]));
+            for I := 0 to AuxiliaresPendentes.Count - 1 do
+            begin
+                Principal.MemoBackupManual.Append('Tentando auxiliares ' + LazFileUtils.ExtractFileNameOnly(AuxiliaresPendentes[I]));
+                if not (sincronizaArquivo(LazFileUtils.ExtractFileNameOnly(AuxiliaresPendentes[I]), 3, true)) then
+                begin
+                    Principal.MemoBackupManual.Append('Sem sucesso');
+                end;
+            end;
+        end;
     finally
         ressincronizaArquivos := true;
     end;
